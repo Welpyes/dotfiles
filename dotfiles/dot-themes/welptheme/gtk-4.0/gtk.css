@@ -43,10 +43,6 @@
 @define-color teal_dark #3B9A94;
 
 /* Base */
-* {
-    -GtkWidget-window-decorations: none;
-}
-
 window {
     background-color: @bg;
     color: @fg;
@@ -109,7 +105,7 @@ button:checked,
 button:selected,
 button:active {
     background-color: @accent;
-    color: @bg;
+    color: @fg;
     border-color: @accent_dark;
 }
 
@@ -125,12 +121,13 @@ button.suggested-action:hover {
 
 button.destructive-action {
     background-color: @error;
-    color: #FFFFFF;
+    color: @fg_dark;
     border-color: @error_dark;
 }
 
 button.destructive-action:hover {
     background-color: @error_dark;
+    color: @bg;
 }
 
 button.flat {
@@ -162,12 +159,13 @@ comboboxentry:focus {
 entry:disabled,
 textview:disabled {
     background-color: @surface_alt;
-    color: @muted;
+    color: alpha(@fg, 0.7);
 }
 
-.selection {
+.selection,
+selection {
     background-color: @accent;
-    color: @bg;
+    color: @fg;
 }
 
 /* Menu */
@@ -193,16 +191,16 @@ menuitem {
 
 menuitem:hover {
     background-color: @accent_light;
-    color: @bg;
+    color: @fg;
 }
 
 menuitem:selected {
     background-color: @accent;
-    color: @bg;
+    color: @fg;
 }
 
 menuitem:disabled {
-    color: @muted;
+    color: alpha(@fg, 0.7);
 }
 
 /* Toolbar */
@@ -220,7 +218,7 @@ notebook {
 
 notebook tab {
     background-color: @surface_alt;
-    color: @muted;
+    color: @fg;
     border-bottom: 2px solid transparent;
     padding: 4px 10px;
     border-radius: 0px;
@@ -245,13 +243,15 @@ frame {
     background-color: @surface;
 }
 
-.label {
+label {
     color: @fg;
 }
 
-.label:disabled,
-.label .dim-label {
-    color: @muted;
+label:disabled,
+label.dim-label,
+label .dim-label,
+.dim-label {
+    color: alpha(@fg, 0.7);
 }
 
 /* Spinbutton / scale */
@@ -275,8 +275,48 @@ scale slider {
     min-height: 12px;
 }
 
-.scale:highlight slider {
+scale highlight {
     background-color: @accent_light;
+}
+
+/* Switch */
+switch {
+    background-color: @surface_alt;
+    border: 1px solid @border;
+    border-radius: 14px;
+    color: @fg;
+}
+
+switch:checked {
+    background-color: @accent;
+    border-color: @accent_dark;
+    color: @fg;
+}
+
+switch:disabled {
+    background-color: @surface;
+    border-color: @border;
+    color: alpha(@fg, 0.7);
+}
+
+switch slider {
+    background-image: none;
+    background-color: @fg_dark;
+    border: 1px solid @border;
+    border-radius: 50%;
+    min-width: 22px;
+    min-height: 22px;
+    box-shadow: none;
+}
+
+switch:checked slider {
+    background-color: @fg_dark;
+    border-color: @accent_dark;
+}
+
+switch:disabled slider {
+    background-color: alpha(@fg, 0.5);
+    border-color: @border;
 }
 
 /* Scrollbar */
@@ -288,7 +328,7 @@ scrollbar {
 }
 
 scrollbar slider {
-    background-color: @muted;
+    background-color: alpha(@fg, 0.6);
     border: none;
     border-radius: 0px;
     min-width: 10px;
@@ -296,7 +336,7 @@ scrollbar slider {
 }
 
 scrollbar slider:hover {
-    background-color: @fg_dim;
+    background-color: alpha(@fg, 0.8);
 }
 
 /* ScrolledWindow / Viewport */
@@ -337,20 +377,17 @@ listview {
 }
 
 treeview:selected,
-listview:selected {
+treeview.view:selected,
+listview:selected,
+listview row:selected,
+treeview row:selected {
     background-color: @accent;
-    color: @bg;
+    color: @fg;
 }
 
 treeview:focus:selected,
 listview:focus:selected {
     background-color: @accent_dark;
-    color: @bg;
-}
-
-.treeview row:selected,
-.listview row:selected {
-    background-color: @accent;
     color: @bg;
 }
 
@@ -361,8 +398,7 @@ listview:focus:selected {
     border-bottom: 1px solid @border;
 }
 
-.entry .linked,
-.entry:linked {
+.linked entry {
     color: @accent;
 }
 
@@ -374,7 +410,7 @@ listview:focus:selected {
 
 .sidebar row:selected {
     background-color: @accent;
-    color: @bg;
+    color: @fg;
 }
 
 .flat-tooltip,
@@ -393,28 +429,28 @@ listview:focus:selected {
 
 .infobar.warning {
     background-color: @warn_light;
-    color: @warn_dark;
+    color: @fg;
 }
 
 .infobar.error {
     background-color: @error_light;
-    color: @error_dark;
+    color: @fg;
 }
 
 .infobar.info {
     background-color: @info_light;
-    color: @info_dark;
+    color: @fg;
 }
 
 .infobar.question,
 .infobar.other {
     background-color: @info_light;
-    color: @info_dark;
+    color: @fg;
 }
 
 .statusbar {
     background-color: @surface_alt;
-    color: @fg_dim;
+    color: @fg;
     border-top: 1px solid @border;
 }
 
