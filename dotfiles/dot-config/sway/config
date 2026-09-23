@@ -9,7 +9,7 @@ set $term foot
 floating_modifier $mod 
 
 ### Output
-output * mode 1366x768@60Hz bg ~/Documents/wallpapers/suipose.png fill
+output * mode 1366x768@60Hz bg ~/Pictures/wallpaper/80612151_p2.jpg fill
 seat * xcursor_theme Hoshimachi-Suisei 16
 
 ### Gaps & Padding
@@ -31,21 +31,21 @@ client.focused_inactive #171823 #171823 #5c5c5c #171823 #171823
 #    Eye Candies   #
 ####################
 
-blur enable
-blur_xray enable
-blur_passes 2
-blur_radius 5
-blur_noise 0.1
-
-shadows enable
-shadows_on_csd enable
-shadow_blur_radius 10
-shadow_offset 0 0
-shadow_color #00000099
-
-default_dim_inactive 0.1
-corner_radius 5
-animation_duration_ms 400
+# blur enable
+# blur_xray enable
+# blur_passes 2
+# blur_radius 5
+# blur_noise 0.1
+#
+# shadows enable
+# shadows_on_csd enable
+# shadow_blur_radius 10
+# shadow_offset 0 0
+# shadow_color #00000099
+#
+# default_dim_inactive 0.1
+# corner_radius 5
+# animation_duration_ms 400
 
 ####################
 #   Applications   #
@@ -150,7 +150,12 @@ bindsym --locked XF86AudioMicMute     exec pactl set-source-mute @DEFAULT_SOURCE
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp   exec brightnessctl set 5%+
 
-exec autotiling-rs
+input "type:touchpad" {
+  tap enabled
+  natural_scroll enabled
+}
+
+# exec autotiling-rs
 
 # vim: ft=bash
 
