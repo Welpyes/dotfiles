@@ -28,7 +28,7 @@ border(){
 
 autostart(){
   pgrep -x sxhkd || sxhkd -c ~/.config/bspwm/sxhkdrc &
-  feh --bg-fill ~/Pictures/wallpapers/2089711133741765002.jpg &
+  feh --bg-fill ~/Pictures/wallpaper/80612151_p2.jpg &
   dunst &
   fastcompmgr &
   pulseaudio --start &
