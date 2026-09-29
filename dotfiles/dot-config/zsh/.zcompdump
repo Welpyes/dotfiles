@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 #files: 1046	version: 5.9.2
+=======
+#files: 861	version: 5.9.2
+>>>>>>> Stashed changes
 
 _comps=(
 '-' '_precommand'
@@ -450,6 +454,7 @@ _comps=(
 'fixwpps' '_psutils'
 'fixwwps' '_psutils'
 'flac' '_flac'
+'flatpak' '_flatpak'
 'flex' '_flex'
 'flex++' '_flex'
 'flipdiff' '_patchutils'
@@ -1017,6 +1022,8 @@ _comps=(
 'nedit-nc' '_nedit'
 'neomutt' '_mutt'
 'netcat' '_netcat'
+'netctl' '_netctl'
+'netctl-auto' '_netctl'
 'netrik' '_webbrowser'
 'netscape' '_netscape'
 'netstat' '_netstat'
@@ -1361,9 +1368,13 @@ _comps=(
 'screen' '_screen'
 'script' '_script'
 'scriptreplay' '_script'
+<<<<<<< Updated upstream
 'scselect' '_scselect'
 'sc_usage' '_sc_usage'
 'scutil' '_scutil'
+=======
+'scrot' '_scrot'
+>>>>>>> Stashed changes
 'seaf-cli' '_seafile'
 'sealert' '_selinux'
 'secon' '_selinux'
@@ -1523,6 +1534,7 @@ _comps=(
 'systemd-path' '_systemd-path'
 'systemd-run' '_systemd-run'
 'systemd-sysinstall' '_systemd-sysinstall'
+'systemd-sysupdate' '_systemd-sysupdate'
 'systemd-tmpfiles' '_systemd-tmpfiles'
 'systemd-tty-ask-password-agent' '_systemd'
 'system_profiler' '_system_profiler'
@@ -1632,9 +1644,13 @@ _comps=(
 'unxz' '_xz'
 'unzip' '_zip'
 'unzstd' '_zstd'
+<<<<<<< Updated upstream
 'update-alternatives' '_update-alternatives'
 'update-rc.d' '_update-rc.d'
 'upgradepkg' '_pkgtool'
+=======
+'updatectl' '_updatectl'
+>>>>>>> Stashed changes
 'uptime' '_uptime'
 'urpme' '_urpmi'
 'urpmf' '_urpmi'
@@ -1775,6 +1791,7 @@ _comps=(
 'whoami' '_nothing'
 'whois' '_whois'
 'whom' '_mh'
+'wifi-menu' '_netctl'
 'wiggle' '_wiggle'
 'wipefs' '_wipefs'
 'wl-copy' '_wl-copy'
@@ -1854,8 +1871,11 @@ _comps=(
 'ypxfr' '_yp'
 'ysh' '_sh'
 'ytalk' '_other_accounts'
+<<<<<<< Updated upstream
 'yum' '_yum'
 'yumdb' '_yum'
+=======
+>>>>>>> Stashed changes
 'zargs' '_zargs'
 'zcalc' '_zcalc'
 '-zcalc-line-' '_zcalc_line'
@@ -2028,6 +2048,7 @@ bindkey '^[,' _history-complete-newer
 bindkey '^[/' _history-complete-older
 bindkey '^[~' _bash_complete-word
 
+<<<<<<< Updated upstream
 autoload -Uz _bspc _busctl _bwrap _cargo _curl \
             _dpkg-parsechangelog _eza _fd _foot _footclient \
             _gh _hostnamectl _journalctl _kernel-install _localectl \
@@ -2106,6 +2127,50 @@ autoload -Uz _bspc _busctl _bwrap _cargo _curl \
             _ipadm _pfexec _pkg5 _prstat _ptree \
             _savecore _snoop _svcadm _svccfg _svcprop \
             _svcs _svcs_fmri _zlogin _zoneadm _zones \
+=======
+autoload -Uz _adb _bootctl _bspc _busctl _bwrap \
+            _cargo _chafa _coredumpctl _curl _dunst \
+            _dunstctl _dunstify _eza _fastboot _fastfetch \
+            _fd _flatpak _gh _hostnamectl _insmod \
+            _journalctl _kernel-install _localectl _loginctl _lsmod \
+            _machinectl _meson _netctl _networkctl _ninja \
+            _oomctl _p11-kit _pacman _pulseaudio _resolvectl \
+            _rg _rmmod _rmpc _run0 _scrot \
+            _sd_bus_address _sd_hosts_or_user_at_host _sd_machines _sd_outputmodes _sd_unit_files \
+            _sensors _sensors-detect _storagectl _systemctl _systemd \
+            _systemd-analyze _systemd-cryptenroll _systemd-delta _systemd-hwdb _systemd-id128 \
+            _systemd-inhibit _systemd-nspawn _systemd-path _systemd-run _systemd-sysinstall \
+            _systemd-sysupdate _systemd-tmpfiles _tailscale _timedatectl _trust \
+            _udevadm _updatectl _userdbctl _varlinkctl _ya \
+            _yay _yazi _zoxide _cdr _all_labels \
+            _all_matches _alternative _approximate _arg_compile _arguments \
+            _as_if _bash_completions _cache_invalid _call_function _combination \
+            _complete _complete_debug _complete_help _complete_help_generic _complete_tag \
+            _comp_locale _correct _correct_filename _correct_word _describe \
+            _description _dispatch _expand _expand_alias _expand_word \
+            _extensions _external_pwds _generic _guard _history \
+            _history_complete_word _ignored _list _main_complete _match \
+            _menu _message _most_recent_file _multi_parts _next_label \
+            _next_tags _normal _nothing _numbers _oldlist \
+            _pick_variant _prefix _read_comp _regex_arguments _regex_words \
+            _requested _retrieve_cache _sep_parts _sequence _set_command \
+            _setup _store_cache _sub_commands _tags _user_expand \
+            _values _wanted _acpi _acpitool _alsa-utils \
+            _analyseplugin _basenc _blkid _brctl _btrfs \
+            _capabilities _chattr _choom _chrt _cpupower \
+            _cryptsetup _e2label _ethtool _findmnt _free \
+            _fuse_arguments _fusermount _fuse_values _gpasswd _htop \
+            _iconvconfig _ionice _ipset _iptables _iwconfig \
+            _kpartx _losetup _lsattr _lsblk _lsns \
+            _lsusb _ltrace _lvm2 _mat _mat2 \
+            _mdadm _mii-tool _modutils _mondo _namei \
+            _networkmanager _nsenter _opkg _perf _pidof \
+            _qdbus _schedtool _selinux _selinux_contexts _selinux_roles \
+            _selinux_types _selinux_users _setpriv _setsid _slabtop \
+            _ss _sshfs _strace _sysstat _tload \
+            _tpb _tracepath _tune2fs _uml _unshare \
+            _valgrind _vserver _wakeup_capable_devices _wipefs _wpa_cli \
+>>>>>>> Stashed changes
             _7zip _a2ps _aap _abcde _absolute_command_paths \
             _ack _adb _age _ansible _ant \
             _antiword _apachectl _apm _arch_archives _arch_namespace \
@@ -2235,8 +2300,12 @@ autoload -Uz _bspc _busctl _bwrap _cargo _curl \
             _vcs_info_hooks _wait _which _widgets _zargs \
             _zattr _zcalc _zcalc_line _zcompile _zed \
             _zftp _zle _zmodload _zmv _zparseopts \
+<<<<<<< Updated upstream
             _zpty _zsh-mime-handler _zsocket _zstyle _ztodo \
             _hwinfo _osc _SUSEconfig _yast _zypper
+=======
+            _zpty _zsh-mime-handler _zsocket _zstyle _ztodo
+>>>>>>> Stashed changes
 autoload -Uz +X _call_program
 
 typeset -gUa _comp_assocs

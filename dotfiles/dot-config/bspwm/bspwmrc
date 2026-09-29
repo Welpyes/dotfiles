@@ -28,10 +28,16 @@ border(){
 
 autostart(){
   pgrep -x sxhkd || sxhkd -c ~/.config/bspwm/sxhkdrc &
+<<<<<<< Updated upstream
   feh --bg-fill ~/Pictures/wallpaper/80612151_p2.jpg &
   dunst &
   fastcompmgr &
   pulseaudio --start &
+=======
+  feh --bg-fill ~/Pictures/wallpapers/Suicute.jpg &
+  dunst &
+  (sleep 2 && fastcompmgr) &
+>>>>>>> Stashed changes
 }
 
 __main__(){
