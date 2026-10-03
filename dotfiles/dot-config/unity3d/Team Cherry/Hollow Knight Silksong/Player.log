@@ -22,10 +22,10 @@ XT_provoking_vertex GL_EXT_rescale_normal GL_EXT_secondary_color GL_EXT_separate
 EXT_window_rectangles GL_EXT_x11_sync_object GL_EXT_import_sync_object GL_NV_robustness_video_memory_purge GL_IBM_rasterpos_clip GL_IBM_texture_mirrored_repeat GL_KHR_context_flush_control GL_KHR_debug GL_EXT_memory_object GL_EXT_memory_object_fd GL_KHR_parallel_shader_compile GL_KHR_no_error GL_KHR_robust_buffer_access_behavior GL_KHR_robustness GL_EXT_semaphore GL_EXT_semaphore_fd GL_NV_timeline_semaphore GL_KHR_shader_subgroup GL_KTX_buffer_region GL_NV_alpha_to_coverage_dither_control GL_NV_bindless_multi_draw_indirect GL_NV_bindless_multi_draw_indirect_count GL_NV_bindless_texture GL_NV_blend_equation_advanced GL_NV_blend_equation_advanced_coherent GL_NV_blend_minmax_factor GL_NV_blend_square GL_NV_command_list GL_NV_compute_program5 GL_NV_conditional_render GL_NV_copy_depth_to_color GL_NV_copy_image GL_NV_depth_buffer_float GL_NV_depth_clamp GL_NV_draw_texture GL_NV_draw_vulkan_image GL_NV_ES1_1_compatibility GL_NV_ES3_1_compatibility GL_NV_explicit_multisample GL_NV_feature_query GL_NV_fence GL_NV_flo
 at_buffer GL_NV_fog_distance GL_NV_fragment_program GL_NV_fragment_program_option GL_NV_fragment_program2 GL_NV_framebuffer_multisample_coverage GL_NV_geometry_shader4 GL_NV_gpu_program4 GL_NV_internalformat_sample_query GL_NV_gpu_program4_1 GL_NV_gpu_program5 GL_NV_gpu_program5_mem_extended GL_NV_gpu_program_fp64 GL_NV_gpu_program_multiview GL_NV_gpu_shader5 GL_NV_half_float GL_NV_light_max_exponent GL_NV_multisample_coverage GL_NV_multisample_filter_hint GL_NV_occlusion_query GL_NV_packed_depth_stencil GL_NV_parameter_buffer_object GL_NV_parameter_buffer_object2 GL_NV_path_rendering GL_NV_pixel_data_range GL_NV_point_sprite GL_NV_primitive_restart GL_NV_query_resource GL_NV_query_resource_tag GL_NV_register_combiners GL_NV_register_combiners2 GL_NV_shader_atomic_counters GL_NV_shader_atomic_float GL_NV_shader_atomic_int64 GL_NV_shader_buffer_load GL_NV_shader_storage_buffer_object GL_NV_shader_subgroup_partitioned GL_NV_texgen_reflection GL_NV_texture_barrier GL_NV_texture_compression_vtc GL_NV_texture_env
 _combine4 GL_NV_texture_multisample GL_NV_texture_rectangle GL_NV_texture_rectangle_compressed GL_NV_texture_shader GL_NV_texture_shader2 GL_NV_texture_shader3 GL_NV_transform_feedback GL_NV_transform_feedback2 GL_NV_uniform_buffer_unified_memory GL_NV_uniform_buffer_std430_layout GL_NV_vdpau_interop GL_NV_vdpau_interop2 GL_NV_vertex_array_range GL_NV_vertex_array_range2 GL_NV_vertex_attrib_integer_64bit GL_NV_vertex_buffer_unified_memory GL_NV_vertex_program GL_NV_vertex_program1_1 GL_NV_vertex_program2 GL_NV_vertex_program2_option GL_NV_vertex_program3 GL_NVX_conditional_render GL_NV_gpu_multicast GL_NVX_progress_fence GL_NVX_gpu_memory_info GL_NVX_nvenc_interop GL_NV_shader_thread_group GL_NV_shader_thread_shuffle GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent GL_OVR_multiview GL_OVR_multiview2 GL_SGIS_generate_mipmap GL_SGIS_texture_lod GL_SGIX_depth_texture GL_SGIX_shadow GL_SUN_slice_accum
-OPENGL LOG: Creating OpenGL 4.5 graphics device ; Context level  <OpenGL 4.5> ; Context handle 968176104
+OPENGL LOG: Creating OpenGL 4.5 graphics device ; Context level  <OpenGL 4.5> ; Context handle 510404840
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.211 seconds
-- Finished resetting the current domain, in  0.004 seconds
+- Loaded All Assemblies, in  0.173 seconds
+- Finished resetting the current domain, in  0.003 seconds
 [Physics::Module] Selected backend.
 [Physics::Module] Name: PhysX
 [Physics::Module] Id: 0xf2b8ea05
@@ -36,121 +36,93 @@ Default vsync count 1
 requesting resize 1322 x 724
 resizing window to 1322 x 724
 Desktop is 1366 x 768 @ 60 Hz
-UnloadTime: 0.476477 ms
+UnloadTime: 0.489382 ms
 No online subsystems packaged.
 Unloading 5 Unused Serialized files (Serialized files now loaded: 528)
-UnloadTime: 1.578862 ms
+UnloadTime: 3.211421 ms
 Discovered supported languages: DE, EN, ES, FR, IT, JA, KO, PT, RU, ZH
-Loaded saved language code 'EN'
-Restored language code 'EN'
+Loaded saved language code 'ZH'
+Restored language code 'ZH'
 Couldn't find a Game Manager, make sure one exists in the scene.
 Couldn't find a Game Manager, make sure one exists in the scene.
 Couldn't find GameCameras, make sure one exists in the scene.
-Unloading 51 unused Assets to reduce memory usage. Loaded Objects now: 6173.
-Total: 6.099618 ms (FindLiveObjects: 0.305467 ms CreateObjectMapping: 0.350066 ms MarkObjects: 5.388380 ms  DeleteObjects: 0.055245 ms)
+Unloading 51 unused Assets to reduce memory usage. Loaded Objects now: 6174.
+Total: 6.057228 ms (FindLiveObjects: 0.275114 ms CreateObjectMapping: 0.173239 ms MarkObjects: 5.562399 ms  DeleteObjects: 0.046126 ms)
 
 Unloading 2 Unused Serialized files (Serialized files now loaded: 528)
-Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 13405.
-Total: 11.808819 ms (FindLiveObjects: 0.657373 ms CreateObjectMapping: 0.640531 ms MarkObjects: 10.459871 ms  DeleteObjects: 0.050414 ms)
+Unloading 1 unused Assets to reduce memory usage. Loaded Objects now: 13406.
+Total: 15.903529 ms (FindLiveObjects: 1.077300 ms CreateObjectMapping: 1.382426 ms MarkObjects: 13.378891 ms  DeleteObjects: 0.064244 ms)
 
 Unloading 1 Unused Serialized files (Serialized files now loaded: 582)
 Couldn't find GameCameras, make sure one exists in the scene.
 Couldn't find a Game Manager, make sure one exists in the scene.
-UnloadTime: 26.094627 ms
-Loaded saved language code 'EN'
-Restored language code 'EN'
+UnloadTime: 28.136570 ms
+Loaded saved language code 'ZH'
+Restored language code 'ZH'
 Unloading 73 unused Assets to reduce memory usage. Loaded Objects now: 67665.
-Total: 75.298486 ms (FindLiveObjects: 5.930305 ms CreateObjectMapping: 3.092956 ms MarkObjects: 65.611920 ms  DeleteObjects: 0.662579 ms)
+Total: 64.125470 ms (FindLiveObjects: 4.916617 ms CreateObjectMapping: 3.342320 ms MarkObjects: 55.492395 ms  DeleteObjects: 0.373665 ms)
 
-Found 1 restore points. : Slot 1
-Save file 1 clearing...
-Save file 1 cleared
 MenuButton missing flashEffect!
 Making UI menu lean.
 Only custom filters can be played. Please add a custom filter or an audioclip to the audiosource (Audio Player Actor Distant V2(Clone)).
 Only custom filters can be played. Please add a custom filter or an audioclip to the audiosource (Audio Player Actor Distant V2(Clone)).
 Only custom filters can be played. Please add a custom filter or an audioclip to the audiosource (Audio Player Actor Distant V2(Clone)).
-Using fallback 1 to find tilemap. Scene Opening_Sequence requires manual fixing.
-Failed to find tilemap in Opening_Sequence entirely.
-Opening sequence changing sequences.
-Unloading 3 Unused Serialized files (Serialized files now loaded: 565)
-Unloading 289 unused Assets to reduce memory usage. Loaded Objects now: 84346.
-Total: 115.259888 ms (FindLiveObjects: 9.106308 ms CreateObjectMapping: 5.013523 ms MarkObjects: 100.269255 ms  DeleteObjects: 0.870203 ms)
+Unloading 3 Unused Serialized files (Serialized files now loaded: 642)
+Unloading 115 unused Assets to reduce memory usage. Loaded Objects now: 133515.
+Total: 146.527623 ms (FindLiveObjects: 10.113808 ms CreateObjectMapping: 8.806746 ms MarkObjects: 125.892395 ms  DeleteObjects: 1.714115 ms)
 
-Couldn't find ControlReminder instance.
-Couldn't find ControlReminder instance.
-Couldn't find ControlReminder instance.
-Unloading 1 Unused Serialized files (Serialized files now loaded: 590)
-Only custom filters can be played. Please add a custom filter or an audioclip to the audiosource (Music).
-Opening sequence changing sequences.
-Opening sequence changing sequences.
-Couldn't find ControlReminder instance.
-Couldn't find ControlReminder instance.
-Couldn't find ControlReminder instance.
-UnloadTime: 1.994425 ms
 Converting Vertex Colors from Color32 to Color.
 Converting Vertex Colors from Color32 to Color.
 Converting Vertex Colors from Color32 to Color.
-Unloading 2277 unused Assets to reduce memory usage. Loaded Objects now: 129639.
-Total: 177.740253 ms (FindLiveObjects: 9.193730 ms CreateObjectMapping: 9.910729 ms MarkObjects: 153.532562 ms  DeleteObjects: 5.102688 ms)
+Cannot use 'linearVelocity' on a static body.
+Unloading 1 Unused Serialized files (Serialized files now loaded: 576)
+Unloading 7535 unused Assets to reduce memory usage. Loaded Objects now: 127325.
+Total: 210.381307 ms (FindLiveObjects: 13.181632 ms CreateObjectMapping: 12.089927 ms MarkObjects: 134.936547 ms  DeleteObjects: 50.172599 ms)
 
-Unloading 2 Unused Serialized files (Serialized files now loaded: 579)
-UnloadTime: 34.145326 ms
-Unloading 2065 unused Assets to reduce memory usage. Loaded Objects now: 122951.
-Total: 180.963792 ms (FindLiveObjects: 12.263837 ms CreateObjectMapping: 9.739826 ms MarkObjects: 151.956678 ms  DeleteObjects: 7.002295 ms)
+Using fallback 1 to find tilemap. Scene Bellshrine requires manual fixing.
+Using fallback 1 to find tilemap. Scene Bellshrine requires manual fixing.
+Could Not Create Action: : Behaviour: Sing:  (Maybe the script was removed?)
+Could Not Create Action: : Behaviour: Sing:  (Maybe the script was removed?)
+Only custom filters can be played. Please add a custom filter or an audioclip to the audiosource (Audio Player Actor Distant V2(Clone)).
+Unloading 1 Unused Serialized files (Serialized files now loaded: 606)
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+Attempting to get `time` on an audio source that has a resource that is not a clip will always return 0.
+UnloadTime: 13.552675 ms
+Unloading 9789 unused Assets to reduce memory usage. Loaded Objects now: 122598.
+Total: 182.037222 ms (FindLiveObjects: 11.412797 ms CreateObjectMapping: 7.270835 ms MarkObjects: 120.425642 ms  DeleteObjects: 42.927499 ms)
 
 Unloading 0 Unused Serialized files (Serialized files now loaded: 526)
-Unloading 8168 unused Assets to reduce memory usage. Loaded Objects now: 25476.
-Total: 98.837630 ms (FindLiveObjects: 1.591120 ms CreateObjectMapping: 2.211680 ms MarkObjects: 76.823609 ms  DeleteObjects: 18.210277 ms)
+Unloading 7718 unused Assets to reduce memory usage. Loaded Objects now: 25765.
+Total: 81.575075 ms (FindLiveObjects: 1.689178 ms CreateObjectMapping: 2.120496 ms MarkObjects: 61.286812 ms  DeleteObjects: 16.478016 ms)
 
 Unloading 1 Unused Serialized files (Serialized files now loaded: 580)
-UnloadTime: 1.093021 ms
-Loaded saved language code 'EN'
-Restored language code 'EN'
-Unloading 57 unused Assets to reduce memory usage. Loaded Objects now: 72979.
-Total: 108.338509 ms (FindLiveObjects: 7.864497 ms CreateObjectMapping: 3.378794 ms MarkObjects: 96.862244 ms  DeleteObjects: 0.232360 ms)
+UnloadTime: 1.087965 ms
+Loaded saved language code 'ZH'
+Restored language code 'ZH'
+Unloading 67 unused Assets to reduce memory usage. Loaded Objects now: 73073.
+Total: 105.115669 ms (FindLiveObjects: 4.721218 ms CreateObjectMapping: 4.444610 ms MarkObjects: 95.419178 ms  DeleteObjects: 0.530178 ms)
 
 Unloading 1 Unused Serialized files (Serialized files now loaded: 578)
-Unloading 5612 unused Assets to reduce memory usage. Loaded Objects now: 67353.
-Total: 110.894851 ms (FindLiveObjects: 4.981679 ms CreateObjectMapping: 5.118246 ms MarkObjects: 84.712955 ms  DeleteObjects: 16.081381 ms)
+Unloading 5617 unused Assets to reduce memory usage. Loaded Objects now: 67442.
+Total: 103.331079 ms (FindLiveObjects: 5.496380 ms CreateObjectMapping: 4.610193 ms MarkObjects: 78.596139 ms  DeleteObjects: 14.627934 ms)
 
-MenuButton missing flashEffect!
-MenuButton missing flashEffect!
-MenuButton missing flashEffect!
-MenuButton missing flashEffect!
-Making UI menu lean.
-Only custom filters can be played. Please add a custom filter or an audioclip to the audiosource (Audio Player Actor Distant V2(Clone)).
-Only custom filters can be played. Please add a custom filter or an audioclip to the audiosource (Audio Player Actor Distant V2(Clone)).
-Only custom filters can be played. Please add a custom filter or an audioclip to the audiosource (Audio Player Actor Distant V2(Clone)).
-Unloading 2 Unused Serialized files (Serialized files now loaded: 577)
-Unloading 403 unused Assets to reduce memory usage. Loaded Objects now: 119281.
-Total: 150.557338 ms (FindLiveObjects: 10.097699 ms CreateObjectMapping: 6.062986 ms MarkObjects: 132.307013 ms  DeleteObjects: 2.088980 ms)
-
-Converting Vertex Colors from Color32 to Color.
-Converting Vertex Colors from Color32 to Color.
-Converting Vertex Colors from Color32 to Color.
-Reloading same scene! Destroying GuidComponents to prevent collisions...
-Unloading 1 Unused Serialized files (Serialized files now loaded: 577)
-Unloading 1088 unused Assets to reduce memory usage. Loaded Objects now: 136386.
-Total: 183.433384 ms (FindLiveObjects: 12.991884 ms CreateObjectMapping: 5.719904 ms MarkObjects: 162.726155 ms  DeleteObjects: 1.994436 ms)
-
-Reloading same scene! Destroying GuidComponents to prevent collisions...
-Unloading 1 Unused Serialized files (Serialized files now loaded: 577)
-Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 136416.
-Total: 172.935919 ms (FindLiveObjects: 13.049956 ms CreateObjectMapping: 4.961608 ms MarkObjects: 154.534528 ms  DeleteObjects: 0.389210 ms)
-
-Reloading same scene! Destroying GuidComponents to prevent collisions...
-Unloading 1 Unused Serialized files (Serialized files now loaded: 577)
-Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 136395.
-Total: 213.977238 ms (FindLiveObjects: 16.122706 ms CreateObjectMapping: 5.926156 ms MarkObjects: 191.621398 ms  DeleteObjects: 0.306195 ms)
-
-Cannot use 'linearVelocity' on a static body.
 Couldn't find a Game Manager, make sure one exists in the scene.
 Couldn't find a Game Manager, make sure one exists in the scene.
 Couldn't find a Game Manager, make sure one exists in the scene.
 Couldn't find a Game Manager, make sure one exists in the scene.
 Couldn't find a Game Manager, make sure one exists in the scene.
-Cannot set the parent of the GameObject 'Mr_Mushroom_Ambient_Shroom_Set' while activating or deactivating the parent GameObject 'Mr Mushroom NPC'.
+Couldn't find a Game Manager, make sure one exists in the scene.
+Couldn't find a Game Manager, make sure one exists in the scene.
+Couldn't find a Game Manager, make sure one exists in the scene.
+Couldn't find a Game Manager, make sure one exists in the scene.
+Couldn't find a Game Manager, make sure one exists in the scene.
+Couldn't find a Game Manager, make sure one exists in the scene.
+Couldn't find a Game Manager, make sure one exists in the scene.
+Couldn't find a Game Manager, make sure one exists in the scene.
+Couldn't find a Game Manager, make sure one exists in the scene.
+Couldn't find a Game Manager, make sure one exists in the scene.
 [Physics::Module] Cleanup current backned.
 [Physics::Module] Id: 0xf2b8ea05
 Input System module state changed to: ShutdownInProgress.

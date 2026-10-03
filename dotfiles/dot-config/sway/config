@@ -156,7 +156,7 @@ input "type:touchpad" {
 }
 input "type:pointer" {
   accel_profile flat
-  pointer_accel 0
+  pointer_accel -0.10
 }
 
 exec autotiling-rs
