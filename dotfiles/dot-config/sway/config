@@ -9,8 +9,11 @@ set $term foot
 floating_modifier $mod 
 
 ### Output
-output * mode 1366x768@60Hz bg ~/Pictures/wallpapers/2089711133741765002.jpg fill
+output * mode 1366x768@60Hz bg ~/Pictures/wallpapers/Suicute.jpg fill
 seat * xcursor_theme Hoshimachi-Suisei 16
+
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAYSOCK
+exec systemctl --user start sway-session.target
 
 ### Gaps & Padding
 gaps inner 10
@@ -160,7 +163,7 @@ input "type:pointer" {
 }
 
 exec autotiling-rs
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK
+exec systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-wlr.service
 
 # vim: ft=bash
 
