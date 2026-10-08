@@ -55,7 +55,6 @@
         },
         {
             "type": "gpu",
-            "format": "{name} [integrated]"
         },
         {
             "type": "memory",

@@ -61,8 +61,7 @@ bindsym $alt+space       exec rofi -show drun -theme ~/.config/rofi/dmenu.rasi -
 bindsym $alt+Tab         exec rofi -show window -theme ~/.config/rofi/dmenu.rasi -wayland 
 bindsym $alt+r           exec rofi -show run -theme ~/.config/rofi/dmenu.rasi -wayland
 
-bindsym $alt+e       exec $term -e yazi
-bindsym $alt+Shift+e exec pcmanfm
+bindsym $alt+e       exec pcmanfm
 
 ####################
 #   Window mgmt    #
@@ -162,8 +161,11 @@ input "type:pointer" {
   pointer_accel -0.10
 }
 
-exec autotiling-rs
 exec systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-wlr.service
-
+exec autotiling-rs
+exec pactl load-module module-null-sink sink_name=virtual_mic
+exec pactl load-module module-remap-source master=virtual_mic.monitor source_name=virtual_mic_source
+exec pactl load-module module-null-sink sink_name=obs_mic
+exec pactl load-module module-remap-source master=obs_mic.monitor source_name=obs_mic_source
 # vim: ft=bash
 

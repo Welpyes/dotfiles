@@ -1,0 +1,7 @@
+(s)|{"appid":"39811e89-d29d-4faa-bb01-997f3cda24f0","userid":"2cb93b8a19d357bb1a40d2a1cb889a40","sessionid":61208746802371973,"platform":"LinuxPlayer","platformid":13,"sdk_ver":"u2019.4.18f1","sdk_rev":"3310a4d4f880","session_count":6,"localprojectid":"5be2ef0cdad9b1344ae103b0d475456b","build_guid":"3f1f2cba27a4449989c71985425c5360","deviceid":"8feece0e668f48e98bef8f6423ba505d","identity_token":"2cb93b8a19d357bb1a40d2a1cb889a40"}
+(g)|2
+{"type":"analytics.custom.v1","msg":{"custom_params":{"time":140.83619295200334,"time_Flight":140.83619295200334,"time_Map":0.0,"time_External":0.0,"time_IVA":0.0,"time_Internal":0.0},"ts":1791455513153,"t_since_start":2159612744,"name":"exit_flight"}}
+{"type":"analytics.custom.v1","msg":{"custom_params":{"game_mode":"SANDBOX","launched_from":"LaunchPad","celestial_body":"Kerbin","vessel_part_count":36,"vessel_crew_count":0,"vessel_crew_count_externalseat":0,"vessel_type":"Probe","steam_fileId":"0"},"ts":1791455540686,"t_since_start":2187145527,"name":"vessel_launched"}}
+{"type":"analytics.custom.v1","msg":{"custom_params":{"game_mode":"SANDBOX","launched_from":"LaunchPad","mod":false,"making_history":true,"serenity":false,"serenity_robotic":false,"serenity_robotic_controller":false},"ts":1791455540686,"t_since_start":2187145734,"name":"vessel_launched_partstats"}}
+{"type":"analytics.appRunning.v1","msg":{"duration":2221,"local_time_offset":-28800000,"ts":1791455582128,"t_since_start":2228587942}}
+(1){"type":"analytics.appStop.v1","msg":{"ts":1791455582128,"t_since_start":2228588272}}

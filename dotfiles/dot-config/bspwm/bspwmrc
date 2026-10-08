@@ -4,7 +4,8 @@ xrdb-wrap() {
   xrdb -query | awk -v k="$key" '$1 == k":" {print $2}'
 }
 
-display(){ bspc monitor -d 1 2 3 4 5
+display(){ 
+  bspc monitor -d 1 2 3 4 5
   xsetroot -cursor_name left_ptr
   xrdb -merge ~/.Xresources
   bspc config pointer_follows_focus false
@@ -28,9 +29,13 @@ border(){
 
 autostart(){
   pgrep -x sxhkd || sxhkd -c ~/.config/bspwm/sxhkdrc &
-  feh --bg-fill ~/Pictures/wallpapers/2089711133741765002.jpg &
+  feh --bg-fill ~/Pictures/wallpapers/Suicute.jpg &
   dunst &
   picom &
+  pactl load-module module-null-sink sink_name=virtual_mic
+  pactl load-module module-remap-source master=virtual_mic.monitor source_name=virtual_mic_source
+  pactl load-module module-null-sink sink_name=obs_mic
+  pactl load-module module-remap-source master=obs_mic.monitor source_name=obs_mic_source
   # (sleep 2 && fastcompmgr) &
 }
 
