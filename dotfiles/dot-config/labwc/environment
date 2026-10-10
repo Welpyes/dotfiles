@@ -1,6 +1,0 @@
-
-export TMPDIR=/tmp
-export TERMINAL="foot"
-
-# vim: ft=sh
-XCURSOR_THEME=Hoshimachi-Suisei

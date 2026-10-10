@@ -10,6 +10,7 @@ display(){
   xrdb -merge ~/.Xresources
   bspc config pointer_follows_focus false
   bspc config focus_follows_pointer true
+  xmodmap -e 'remove Lock = Caps_Lock' -e 'keycode 66 = Tab'
 }
 
 gaps(){
@@ -29,13 +30,13 @@ border(){
 
 autostart(){
   pgrep -x sxhkd || sxhkd -c ~/.config/bspwm/sxhkdrc &
-  feh --bg-fill ~/Pictures/wallpapers/Suicute.jpg &
+  feh --bg-fill ~/Pictures/wallpapers/Suicool.jpg &
   dunst &
-  picom &
-  pactl load-module module-null-sink sink_name=virtual_mic
-  pactl load-module module-remap-source master=virtual_mic.monitor source_name=virtual_mic_source
-  pactl load-module module-null-sink sink_name=obs_mic
-  pactl load-module module-remap-source master=obs_mic.monitor source_name=obs_mic_source
+  picom --config $HOME/.config/bspwm/picom.conf &
+  # pactl load-module module-null-sink sink_name=virtual_mic
+  # pactl load-module module-remap-source master=virtual_mic.monitor source_name=virtual_mic_source
+  # pactl load-module module-null-sink sink_name=obs_mic
+  # pactl load-module module-remap-source master=obs_mic.monitor source_name=obs_mic_source
   # (sleep 2 && fastcompmgr) &
 }
 
