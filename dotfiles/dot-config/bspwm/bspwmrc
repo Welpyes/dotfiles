@@ -1,4 +1,7 @@
 #!/usr/bin/bash
+
+WINDOW_GAP=10
+
 xrdb-wrap() {
   local key="$1"
   xrdb -query | awk -v k="$key" '$1 == k":" {print $2}'
@@ -14,11 +17,11 @@ display(){
 }
 
 gaps(){
-  bspc config window_gap 10
-  bspc config top_padding 10
-  bspc config bottom_padding 10
-  bspc config right_padding 10
-  bspc config left_padding 10
+  bspc config window_gap $WINDOW_GAP
+  bspc config top_padding $WINDOW_GAP
+  bspc config bottom_padding $WINDOW_GAP
+  bspc config right_padding $WINDOW_GAP
+  bspc config left_padding $WINDOW_GAP
 }
 
 border(){
@@ -28,9 +31,13 @@ border(){
   bspc config focused_border_color "$(xrdb-wrap colors.blue)"
 }
 
+rules(){
+  bspc rule -a Fabric manage=off
+}
+
 autostart(){
   pgrep -x sxhkd || sxhkd -c ~/.config/bspwm/sxhkdrc &
-  feh --bg-fill ~/Pictures/wallpapers/Suicool.jpg &
+  feh --bg-fill ~/Pictures/wallpapers/Suicool-enhanced.jpg &
   dunst &
   picom --config $HOME/.config/bspwm/picom.conf &
   # pactl load-module module-null-sink sink_name=virtual_mic
@@ -44,6 +51,7 @@ __main__(){
   display
   gaps
   border
+  rules
   autostart
 }
 __main__
