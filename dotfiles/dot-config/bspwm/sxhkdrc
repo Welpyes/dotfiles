@@ -28,7 +28,7 @@ alt + r
   rofi -show run -theme ~/.config/rofi/dmenu.rasi
 # Screenshot
 alt + shift + s
-  scrot -Z 2 -d 1 -f '%Y-%m-%d_%H-%M-%S_scrot.png' -e 'mv $f ~/Pictures/Screenshots/'
+  scrot -Z 2 -d 1 -f '%Y-%m-%d_%H-%M-%S_scrot.png' -e 'mv $f ~/Pictures/screenshots/'
 
 ####################
 #   bspwm hotkeys  #
