@@ -31,13 +31,9 @@ border(){
   bspc config focused_border_color "$(xrdb-wrap colors.blue)"
 }
 
-rules(){
-  bspc rule -a Fabric manage=off
-}
-
 autostart(){
   pgrep -x sxhkd || sxhkd -c ~/.config/bspwm/sxhkdrc &
-  feh --bg-fill ~/Pictures/wallpapers/Suicool-enhanced.jpg &
+  feh --bg-fill ~/Pictures/wallpapers/Suicool.jpg &
   dunst &
   picom --config $HOME/.config/bspwm/picom.conf &
   # pactl load-module module-null-sink sink_name=virtual_mic
