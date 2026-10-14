@@ -87,9 +87,21 @@ hl.config({
 
         blur = {
             enabled = true,
-            size = 3,
-            passes = 1,
+
+            -- Fake blur: samples the wallpaper and ignores tiled windows
+            -- behind the surface, giving a frosted background instead of
+            -- see-through ghosting. Also cheaper, since the windows beneath
+            -- are skipped. NOTE: only applies to floating windows -- float one
+            -- with alt+s to actually see it.
+            xray = true,
+
+            -- xray is force-disabled when this is off, so set it explicitly.
+            new_optimizations = true,
+
+            size = 8,   -- was 3, which barely read; 8 is Hyprland's own default
+            passes = 3, -- higher size needs more passes or the blur looks wrong
             vibrancy = 0.1696,
+            noise = 0.0117, -- dithers banding, which shows up at higher size
         },
     },
 })
