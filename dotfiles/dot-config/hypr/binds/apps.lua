@@ -17,11 +17,15 @@ hl.bind(mod .. " + space", hl.dsp.exec_cmd(settings.rofi .. " drun"))
 hl.bind(mod .. " + Tab", hl.dsp.exec_cmd(settings.rofi .. " window"))
 hl.bind(mod .. " + r", hl.dsp.exec_cmd(settings.rofi .. " run"))
 
--- alt + shift + s -> scrot, matching sxhkdrc's screenshot script.
+-- alt + shift + s -> fullscreen screenshot.
+-- hyprshot has no plain "fullscreen" mode; `-m output` is the full-screen one
+-- (bare `hyprshot` prints help and exits 2, a mode is always required). It also
+-- copies the image to the clipboard via wl-copy. -o keeps the destination where
+-- the old scrot bind put it; drop it to fall back to $XDG_PICTURES_DIR.
 hl.bind(
     mod .. " + SHIFT + s",
     hl.dsp.exec_cmd(
-        "scrot -Z 2 -d 1 -f '%Y-%m-%d_%H-%M-%S_scrot.png'"
-            .. " -e 'mv $f ~/Pictures/screenshots/'"
+        "hyprshot -m output -o " .. settings.screenshots
+            .. " -f '%Y-%m-%d_%H-%M-%S_hyprshot.png'"
     )
 )

@@ -15,4 +15,8 @@ return {
     -- Existing rofi helper; already hardcodes the dmenu.rasi theme that
     -- sxhkdrc passed by hand. Takes the mode as $1, defaulting to drun.
     rofi = home .. "/.config/rofi/launch.sh",
+
+    -- Where hyprshot writes. Without an explicit -o it falls back to
+    -- $XDG_PICTURES_DIR, which env.zsh sets to ~/Pictures.
+    screenshots = home .. "/Pictures/screenshots",
 }
