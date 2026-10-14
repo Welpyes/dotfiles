@@ -14,12 +14,15 @@ from libqtile import layout
 
 from theme import BORDER_FOCUS, BORDER_NORMAL
 
-GAP = 10  # WINDOW_GAP in bspwmrc
+GAP = 5  # WINDOW_GAP in bspwmrc
 
 bsp = layout.Bsp(
     margin=GAP,
     margin_on_single=GAP,
     border_width=2,
+    # qtile drops the border when a group holds a single window; bspwm's
+    # `bspc config border_width 2` applies unconditionally.
+    border_on_single=True,
     border_focus=BORDER_FOCUS,
     border_normal=BORDER_NORMAL,
     # bspwm splits the *focused* window. qtile's default (fair=True) instead

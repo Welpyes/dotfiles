@@ -15,8 +15,17 @@ from __future__ import annotations
 
 import os
 import re
+import subprocess
 
 XRESOURCES = os.path.expanduser("~/.Xresources")
+
+GTK_INTERFACE = "org.gnome.desktop.interface"
+
+# Used when dconf has no cursor preference, or names a theme that is not
+# installed. Must be a cursor theme *directory* name under ~/.icons, matching
+# what nwg-look/lxappearance write into gsettings.
+CURSOR_FALLBACK = "Hoshimachi-Suisei"
+CURSOR_SIZE_FALLBACK = 24
 
 # Mirrors the values in dotfiles/dot-Xresources.
 FALLBACK = {
@@ -72,6 +81,46 @@ def _read_xresources(path: str = XRESOURCES) -> dict[str, str]:
 
 
 _XRESOURCES = _read_xresources()
+
+
+def _gsettings(schema: str, key: str) -> str | None:
+    """Read a gsettings value, returning None if unavailable."""
+    try:
+        result = subprocess.run(
+            ["gsettings", "get", schema, key],
+            capture_output=True,
+            text=True,
+            timeout=2,
+            check=False,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if result.returncode != 0:
+        return None
+    # gsettings quotes string values: 'Hoshimachi-Suisei'
+    return result.stdout.strip().strip("'") or None
+
+
+def _resolve_cursor_theme() -> str:
+    """Pick a cursor theme that actually exists.
+
+    wlr loads cursor themes by *directory* name under the XDG icon dirs and
+    falls back silently when the name does not resolve -- so a theme name that
+    is wrong in any way looks exactly like no theme at all. Verify the candidate
+    has a cursors/ directory before trusting it.
+    """
+    candidate = _gsettings(GTK_INTERFACE, "cursor-theme")
+    if candidate and os.path.isdir(os.path.expanduser(f"~/.icons/{candidate}/cursors")):
+        return candidate
+    return CURSOR_FALLBACK
+
+
+CURSOR_THEME = _resolve_cursor_theme()
+
+try:
+    CURSOR_SIZE = int(_gsettings(GTK_INTERFACE, "cursor-size") or CURSOR_SIZE_FALLBACK)
+except ValueError:
+    CURSOR_SIZE = CURSOR_SIZE_FALLBACK
 
 
 def color(key: str, default: str | None = None) -> str:

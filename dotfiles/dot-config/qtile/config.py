@@ -11,6 +11,7 @@ reload -- so edits to any module below are picked up by mod+ctrl+r.
   keys_bsp.py     focus / move / resize
   keys_apps.py    rofi launcher / window switcher / run
   keys_misc.py    window state, workspaces, WM control
+  input_rules.py  libinput port of xorg.conf.d/*.conf
 """
 
 import os
@@ -20,12 +21,21 @@ from libqtile import bar, layout, widget
 from libqtile.config import Click, Drag, Group, Match, Output, Screen
 from libqtile.lazy import lazy
 
+from input_rules import wl_input_rules
 from keys_apps import keys as app_keys
 from keys_bsp import keys as bsp_keys
 from keys_misc import group_keys, keys as misc_keys, vt_keys
 from layout_bsp import bsp
 from settings import mod
-from theme import ACCENT, BACKGROUND, FOREGROUND, FONT, STATUSLINE
+from theme import (
+    ACCENT,
+    BACKGROUND,
+    CURSOR_SIZE,
+    CURSOR_THEME,
+    FOREGROUND,
+    FONT,
+    STATUSLINE,
+)
 
 groups = [Group(str(i)) for i in range(1, 10)]
 _group_names = [g.name for g in groups]
@@ -127,10 +137,13 @@ reconfigure_screens = True
 screen_change_debounce_timeout = 1
 auto_minimize = True
 
-# Input device config for the Wayland backend.
-wl_input_rules = None
-wl_xcursor_theme = "left_ptr"
-wl_xcursor_size = 24
+# Cursor theme and size come from gsettings, i.e. whatever nwg-look/lxappearance
+# last set. This must be a cursor theme *directory* name under ~/.icons -- wlr
+# looks the theme up by directory name and silently falls back when it misses,
+# which is why an unverified name looks identical to no theme at all.
+# wl_input_rules is already bound by the import above.
+wl_xcursor_theme = CURSOR_THEME
+wl_xcursor_size = CURSOR_SIZE
 
 idle_timers: list = []
 idle_inhibitors: list = []

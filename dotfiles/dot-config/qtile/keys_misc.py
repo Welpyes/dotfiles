@@ -16,6 +16,9 @@ Not ported from sxhkdrc, because qtile has no counterpart:
     next/prev workspace command: Group.get_next_group() is not exposed, and
     group names resolve through a plain groups_map lookup. Binding a literal
     neighbour would always jump to one fixed group, not relative to the current.
+  * wm -r (alt+shift+r)                       -- the Wayland backend sets
+    supports_restarting = False, so lazy.restart() raises CommandError. The
+    binding reloads the config instead.
 """
 
 from libqtile import qtile
@@ -40,8 +43,10 @@ keys = [
     Key([mod, "shift"], "c", lazy.layout.previous(), desc="Focus previous window"),
     # alt + shift + {q,r} -> bspc {quit,wm -r}
     Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown qtile"),
-    Key([mod, "shift"], "r", lazy.restart(), desc="Restart qtile"),
-    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload config"),
+    # bspc wm -r restarts the WM. qtile's Wayland backend sets
+    # supports_restarting = False, so lazy.restart() only ever raises
+    # CommandError here; reloading the config is the closest equivalent.
+    Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload config"),
     # alt + shift + m -> bspc desktop -l next
     Key([mod, "shift"], "m", lazy.next_layout(), desc="Next layout"),
 ]
