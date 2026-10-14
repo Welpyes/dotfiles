@@ -13,7 +13,7 @@ display(){
   xrdb -merge ~/.Xresources
   bspc config pointer_follows_focus false
   bspc config focus_follows_pointer true
-  xmodmap -e 'remove Lock = Caps_Lock' -e 'keycode 66 = Tab'
+  # xmodmap -e 'remove Lock = Caps_Lock' -e 'keycode 66 = Tab'
 }
 
 gaps(){
