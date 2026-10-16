@@ -1,7 +1,6 @@
 """A vertical bar pinned to the left edge.
 
-32px wide, full monitor height, split into three sections:
-  top    - empty for now
+32px wide, full monitor height, split into sections:
   center - workspaces as circles
   bottom - a two row clock (12 hour, no AM/PM)
 
@@ -25,12 +24,38 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
 
 BAR_WIDTH = 32
-WORKSPACES = range(1, 10)
+WORKSPACES = range(1, 6)
 CIRCLE_SIZE = 14
 DOT_SIZE = 4
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 STYLES = os.path.join(HERE, "styles", "style.css")
+
+XRESOURCES = os.path.expanduser("~/.Xresources")
+
+
+def xresource(key, fallback):
+  try:
+    with open(XRESOURCES, encoding="utf-8") as handle:
+      for line in handle:
+        line = line.split("!", 1)[0].strip()
+        if not line:
+          continue
+        name, sep, value = line.partition(":")
+        if sep and name.strip() == key:
+          return value.strip() or fallback
+  except OSError:
+    pass
+  return fallback
+
+
+LINE = xresource("colors.line", "#252631")
+
+
+def stylesheet():
+  with open(STYLES, encoding="utf-8") as handle:
+    css = handle.read()
+  return f":vars {{ --line: {LINE}; }}\n" + css
 
 
 def workspace_button(workspace_id: int) -> WorkspaceButton:
@@ -49,7 +74,7 @@ def workspace_list() -> HyprlandWorkspaces:
     buttons=[workspace_button(i) for i in WORKSPACES],
     buttons_factory=workspace_button,
   )
-  ws.set_valign(Gtk.Align.CENTER)
+  ws.set_valign(Gtk.Align.START)
   ws.set_halign(Gtk.Align.CENTER)
   return ws
 
@@ -66,7 +91,6 @@ class VerticalBar(WaylandWindow):
         h_expand=True,
         v_expand=True,
         children=[
-          Box(name="bar-top", orientation="v"),
           Box(
             name="bar-center",
             orientation="v",
@@ -99,5 +123,5 @@ class VerticalBar(WaylandWindow):
 
 if __name__ == "__main__":
   app = Application("bar", VerticalBar())
-  app.set_stylesheet_from_file(STYLES)
+  app.set_stylesheet_from_string(stylesheet())
   app.run()

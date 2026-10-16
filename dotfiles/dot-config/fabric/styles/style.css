@@ -13,10 +13,10 @@
 #bar {
   background-color: @bg;
   color: @fg;
-  padding: 6px 0;
+  padding: 4px 0;
+  border-right: 1px solid @line;
 }
 
-#bar-top,
 #bar-bottom {
   padding: 4px 0;
 }

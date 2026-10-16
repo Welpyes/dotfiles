@@ -1,4 +1,5 @@
 local theme = require("theme")
+hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
 
 hl.monitor({
   output = "",
@@ -59,6 +60,7 @@ hl.config({
 hl.config({
   dwindle = {
     preserve_split = true,
+    force_split = 2,
   },
 })
 
