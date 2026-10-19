@@ -4,3 +4,6 @@
 [submodule "st-terminal"]
 	path = st-terminal
 	url = https://github.com/Welpyes/st
+[submodule "st"]
+	path = st
+	url = wp:st
