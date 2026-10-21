@@ -1,0 +1,10 @@
+/* Patches */
+#include "alpha.h"
+#include "boxdraw.h"
+#include "drag-n-drop.h"
+#include "font2.h"
+#include "netwmicon.h"
+#include "openselectedtext.h"
+#include "st_embedder_x.h"
+#include "xresources.h"
+#include "osc133.h"
