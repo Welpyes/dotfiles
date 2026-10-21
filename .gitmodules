@@ -1,9 +1,0 @@
-[submodule "nvim"]
-	path = nvim
-	url = https://github.com/Welpyes/neovim-config
-[submodule "st-terminal"]
-	path = st-terminal
-	url = https://github.com/Welpyes/st
-[submodule "st"]
-	path = st
-	url = wp:st
