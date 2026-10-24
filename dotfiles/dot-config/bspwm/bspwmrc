@@ -37,8 +37,7 @@ border(){
 autostart(){
   pgrep -x sxhkd || sxhkd -c ~/.config/bspwm/sxhkdrc &
   dunst &
-  # xwallpaper --zoom ~/.config/bspwm/wallpapers/kazusa-aestethyeah.jpeg
-  xwallpaper --zoom ~/Pictures/Twitter/Suicute.jpg
+  xwallpaper --zoom ~/.config/bspwm/wallpapers/kazusa-aestethyeah.jpeg
   picom --config $HOME/.config/bspwm/picom.conf &
   # $HOME/.local/bin/wallpaper.sh &
   # pactl load-module module-null-sink sink_name=virtual_mic
