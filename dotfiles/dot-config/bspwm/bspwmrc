@@ -13,7 +13,10 @@ display(){
   xrdb -merge ~/.Xresources
   bspc config pointer_follows_focus false
   bspc config focus_follows_pointer true
-  # xmodmap -e 'remove Lock = Caps_Lock' -e 'keycode 66 = Tab'
+}
+
+audio() {
+  pipewire > /dev/null 2>&1 &
 }
 
 gaps(){
@@ -34,7 +37,8 @@ border(){
 autostart(){
   pgrep -x sxhkd || sxhkd -c ~/.config/bspwm/sxhkdrc &
   dunst &
-  xwallpaper --zoom ~/.config/bspwm/wallpapers/kazusa-aestethyeah.jpeg
+  # xwallpaper --zoom ~/.config/bspwm/wallpapers/kazusa-aestethyeah.jpeg
+  xwallpaper --zoom ~/Pictures/Twitter/Suicute.jpg
   picom --config $HOME/.config/bspwm/picom.conf &
   # $HOME/.local/bin/wallpaper.sh &
   # pactl load-module module-null-sink sink_name=virtual_mic
@@ -46,6 +50,7 @@ autostart(){
 
 __main__(){
   display
+  audio
   gaps
   border
   rules
