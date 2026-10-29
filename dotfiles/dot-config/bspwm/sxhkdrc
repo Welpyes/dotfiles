@@ -13,10 +13,7 @@ alt + shift + p
 	pkill -USR1 -x picom
 # terminal file manager
 alt + e
-  st -e yazi
-# gui file manager
-alt + shift + e
-  caja
+  nautilus
 # app launcher
 alt + space
   rofi -show drun -theme ~/.config/rofi/dmenu.rasi

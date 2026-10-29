@@ -14,7 +14,7 @@ path+=("$HOME/go/bin")
 export GPG_TTY=$(tty)
 
 export SUDO_PROMPT="passwd: "
-export TERMINAL="st"
+export TERMINAL="foot"
 export BROWSER="helium-browser"
 export VISUAL="nvim"
 export EDITOR="nvim"

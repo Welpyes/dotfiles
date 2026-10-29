@@ -49,7 +49,7 @@ autostart(){
 
 __main__(){
   display
-  audio
+  # audio
   gaps
   border
   rules
