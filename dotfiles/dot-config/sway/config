@@ -9,11 +9,13 @@ set $term foot
 floating_modifier $mod 
 
 ### Output
-output * mode 1366x768@60Hz bg ~/.config/bspwm/wallpapers/kazusa-aestethic.jpeg fill
+output * mode 1366x768@60Hz bg ~/.config/sway/wallpapers/kazusa-aestethyeah.jpeg fill
 seat * xcursor_theme Kyoyama-Kazusa 16
 
-exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAYSOCK
-exec systemctl --user start sway-session.target
+Xwayland enable
+
+exec dbus-update-activation-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway SWAY_SOCK
+# exec systemctl --user start sway-session.target
 
 ### Gaps & Padding
 gaps inner 10
@@ -156,8 +158,8 @@ input "type:pointer" {
   pointer_accel -0.10
 }
 
-exec systemctl --user restart xdg-desktop-portal.service xdg-desktop-portal-wlr.service
 exec autotiling-rs
+exec pipewire
 # exec pactl load-module module-null-sink sink_name=virtual_mic
 # exec pactl load-module module-remap-source master=virtual_mic.monitor source_name=virtual_mic_source
 # exec pactl load-module module-null-sink sink_name=obs_mic

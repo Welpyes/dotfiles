@@ -11,7 +11,9 @@ path+=("$HOME/.local/bin")
 path+=("$HOME/.zvm/bin")
 path+=("$HOME/.cargo/bin")
 path+=("$HOME/go/bin")
+path+=("$HOME/.opencode/bin")
 export GPG_TTY=$(tty)
+export PKG_CONFIG_PATH="/usr/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 export SUDO_PROMPT="passwd: "
 export TERMINAL="foot"

@@ -33,7 +33,7 @@ configuration {
     case-sensitive: false;
     
     /* Misc */
-    terminal: "st";
+    terminal: "foot";
     ssh-client: "ssh";
     ssh-command: "{terminal} -e {ssh-client} {host}";
     run-shell-command: "{terminal} -e {cmd}";
