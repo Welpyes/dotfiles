@@ -2,14 +2,14 @@
 * {
   bg: #FFF8F0;
   bg-alt: #FDEFE2;
-  fg: #5C4136;
-  fg-alt: #C9A58F;
-  red: #F2766F;
-  green: #8FCB7E;
-  yellow: #FFD54F;
-  blue: #7FB1E6;
-  purple: #B08CE0;
-  cyan: #7CCBC0;
+  fg: #6E4F43;
+  fg-alt: #B08A74;
+  red: #E04F48;
+  green: #4FAE4F;
+  yellow: #E9AE0C;
+  blue: #3D84D6;
+  purple: #8A57D6;
+  cyan: #26A69A;
   grey: #E8CDB8;
   background-color: transparent;
   font: "Ioskeley Mono Semibold 12";

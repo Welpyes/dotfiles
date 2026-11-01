@@ -204,15 +204,12 @@ def _replace_between(text: str, block: str) -> str:
 
 
 def wire_foot(text: str, c: dict) -> str:
-    include = f'include = {INSTALL_DIR / "foot.ini"}'
-    block = f"{include}\n"
-    # replace the [colors-dark] section body with just the include
-    pattern = re.compile(r"\[colors-dark\](.*?)(?=\n\[|\Z)", re.DOTALL)
-    new_section = f"[colors-dark]\n{block}"
-    if pattern.search(text):
-        return pattern.sub(new_section, text)
-    # no [colors-dark] section: append at top
-    return new_section + "\n" + text
+    include = f"include = {INSTALL_DIR / 'foot.ini'}\n"
+    # drop any previous [colors-dark] section: colours/foot.ini already has it
+    text = re.sub(r"\[colors-dark\].*?(?=\n\[|\Z)", "", text, flags=re.DOTALL)
+    # drop any previous include line to this colours file (idempotent re-runs)
+    text = re.sub(re.escape(include), "", text)
+    return include + text.lstrip("\n")
 
 
 def wire_sway(text: str, c: dict) -> str:
