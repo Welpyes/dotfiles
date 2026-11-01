@@ -378,7 +378,7 @@ def gen_posh_zen(c: dict) -> str:
     git_tmpl = (
         " {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <#"
         + teal
-        + "{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>"
+        + ">{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>"
     )
     template = """\
 # __NOTE__
