@@ -12,4 +12,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "@comment", { link = "Comment" })
   end,
 })
-vim.cmd [[colorscheme tokyonight-night]]
+
+local colours = dofile("/home/welpyes/.config/colours/nvim.lua")
+colours.setup()

@@ -157,12 +157,146 @@ def gen_posh(c: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
+def gen_nvim(c: dict) -> str:
+    roles = ",\n  ".join(f'{role} = "#{c[role]}"' for role in sorted(c))
+    hl_calls = []
+    for group, opts in _NVIM_HIGHLIGHTS.items():
+        resolved = []
+        for k, v in opts.items():
+            if k == "link":
+                resolved.append(f"{k} = {v!r}")
+            elif isinstance(v, bool):
+                resolved.append(f"{k} = {v}")
+            else:
+                resolved.append(f'{k} = "#{c[v]}"')
+        args = ", ".join(resolved)
+        hl_calls.append(f'  hl("{group}", {{{args}}})')
+    return f"""\
+-- {GEN_NOTE}
+local M = {{}}
+
+M.colors = {{
+  {roles}
+}}
+
+local function hl(group, opts)
+  vim.api.nvim_set_hl(0, group, opts)
+end
+
+function M.setup()
+  vim.o.background = "light"
+  vim.o.termguicolors = true
+  if vim.g.colors_name then
+    vim.cmd("hi clear")
+  end
+  vim.g.colors_name = "sweet-blush"
+  local c = M.colors
+{chr(10).join(hl_calls)}
+end
+
+return M
+"""
+
+
+# Standard vim/nvim highlight groups -> palette roles.
+_NVIM_HIGHLIGHTS = {
+    "Normal": {"fg": "fg", "bg": "bg"},
+    "NormalNC": {"fg": "fg", "bg": "surface_alt"},
+    "NormalFloat": {"fg": "fg", "bg": "surface"},
+    "LineNr": {"fg": "fg_dim", "bg": "surface"},
+    "CursorLineNr": {"fg": "accent", "bg": "surface", "bold": True},
+    "CursorLine": {"bg": "surface"},
+    "Visual": {"bg": "surface_alt"},
+    "Search": {"fg": "bg", "bg": "accent"},
+    "IncSearch": {"fg": "bg", "bg": "orange"},
+    "Comment": {"fg": "fg_dim", "italic": False},
+    "@comment": {"link": "Comment"},
+    "Constant": {"fg": "error"},
+    "String": {"fg": "success"},
+    "Character": {"fg": "success"},
+    "Number": {"fg": "pink"},
+    "Boolean": {"fg": "pink"},
+    "Identifier": {"fg": "accent"},
+    "Function": {"fg": "accent"},
+    "Statement": {"fg": "error"},
+    "Conditional": {"fg": "error"},
+    "Repeat": {"fg": "error"},
+    "Label": {"fg": "orange"},
+    "Operator": {"fg": "fg"},
+    "Keyword": {"fg": "error"},
+    "Exception": {"fg": "error"},
+    "PreProc": {"fg": "pink"},
+    "Include": {"fg": "pink"},
+    "Define": {"fg": "pink"},
+    "Macro": {"fg": "pink"},
+    "PreCondit": {"fg": "pink"},
+    "Type": {"fg": "teal"},
+    "StorageClass": {"fg": "teal"},
+    "Structure": {"fg": "teal"},
+    "Typedef": {"fg": "teal"},
+    "Special": {"fg": "orange"},
+    "SpecialChar": {"fg": "orange"},
+    "Tag": {"fg": "pink"},
+    "Delimiter": {"fg": "fg_dim"},
+    "SpecialComment": {"fg": "fg_dim"},
+    "Debug": {"fg": "error"},
+    "Underlined": {"fg": "teal", "underline": True},
+    "Ignore": {"fg": "fg_dim"},
+    "Error": {"fg": "error", "bg": "error_light"},
+    "Todo": {"fg": "warn", "bold": True},
+    "Title": {"fg": "accent", "bold": True},
+    "Pmenu": {"fg": "fg", "bg": "surface"},
+    "PmenuSel": {"fg": "bg", "bg": "accent"},
+    "PmenuSbar": {"bg": "surface_alt"},
+    "PmenuThumb": {"bg": "border"},
+    "StatusLine": {"fg": "fg_dim", "bg": "border"},
+    "StatusLineNC": {"fg": "fg_dim", "bg": "surface_alt"},
+    "TabLine": {"fg": "fg_dim", "bg": "surface_alt"},
+    "TabLineSel": {"fg": "fg", "bg": "bg"},
+    "TabLineFill": {"bg": "surface"},
+    "VertSplit": {"fg": "border"},
+    "WinSeparator": {"fg": "border"},
+    "Folded": {"fg": "fg_dim", "bg": "surface_alt"},
+    "FoldColumn": {"fg": "fg_dim", "bg": "surface"},
+    "SignColumn": {"fg": "fg", "bg": "surface"},
+    "Cursor": {"fg": "bg", "bg": "fg"},
+    "iCursor": {"fg": "fg", "bg": "bg"},
+    "vCursor": {"fg": "fg", "bg": "bg"},
+    "MatchParen": {"fg": "accent", "bold": True},
+    "NonText": {"fg": "fg_dim"},
+    "SpecialKey": {"fg": "fg_dim"},
+    "Directory": {"fg": "accent"},
+    "ErrorMsg": {"fg": "error"},
+    "WarningMsg": {"fg": "warn"},
+    "ModeMsg": {"fg": "fg"},
+    "MoreMsg": {"fg": "success"},
+    "DiagnosticError": {"fg": "error"},
+    "DiagnosticWarn": {"fg": "warn"},
+    "DiagnosticInfo": {"fg": "info"},
+    "DiagnosticHint": {"fg": "teal"},
+    "DiagnosticOk": {"fg": "success"},
+    "DiagnosticUnderlineError": {"sp": "error", "undercurl": True},
+    "DiagnosticUnderlineWarn": {"sp": "warn", "undercurl": True},
+    "DiagnosticUnderlineInfo": {"sp": "info", "undercurl": True},
+    "DiagnosticUnderlineHint": {"sp": "teal", "undercurl": True},
+    "@variable": {"fg": "fg"},
+    "@parameter": {"fg": "orange"},
+    "@property": {"fg": "teal"},
+    "@function": {"fg": "accent"},
+    "@keyword": {"fg": "error"},
+    "@type": {"fg": "teal"},
+    "@string": {"fg": "success"},
+    "@constant": {"fg": "error"},
+    "@punctuation": {"fg": "fg_dim"},
+}
+
 GENERATORS = {
     "foot": ("foot.ini", gen_foot),
     "sway": ("sway.conf", gen_sway),
     "zsh": ("zsh.sh", gen_zsh),
     "rofi": ("rofi.rasi", gen_rofi),
     "posh": ("posh.toml", gen_posh),
+    "nvim": ("nvim.lua", gen_nvim),
 }
 
 HOSTS = {
@@ -171,6 +305,8 @@ HOSTS = {
     "zsh": REPO_ROOT / "dotfiles" / "dot-config" / "zsh" / "env.zsh",
     "posh": REPO_ROOT / "dotfiles" / "dot-config" / "oh-my-posh" / "zen.toml",
     "rofi": REPO_ROOT / "dotfiles" / "dot-config" / "rofi" / "theme-generated.rasi",
+    "nvim": REPO_ROOT / "dotfiles" / "dot-config" / "nvim" / "init.lua",
+    "colorscheme": REPO_ROOT / "dotfiles" / "dot-config" / "nvim" / "lua" / "plugins" / "colourscheme.lua",
 }
 
 
@@ -341,12 +477,34 @@ def wire_rofi(text: str, c: dict) -> str:
 """
 
 
+def wire_nvim_init(text: str, c: dict) -> str:
+    # nvim has no include: load the generated colours module via dofile.
+    colours_path = INSTALL_DIR / "nvim.lua"
+    block = f'local colours = dofile("{colours_path}")\ncolours.setup()\n'
+    # drop any previous tokyonight colourscheme line
+    text = text.replace('vim.cmd [[colorscheme tokyonight-night]]\n', "")
+    # drop any previous dofile block (idempotent re-runs)
+    text = re.sub(
+        r'local colours = dofile\("' + re.escape(str(colours_path)) + r'"\)\ncolours\.setup\(\)\n',
+        "",
+        text,
+    )
+    return text.rstrip() + "\n\n" + block
+
+
+def wire_colorscheme(text: str, c: dict) -> str:
+    # Remove the tokyonight plugin; colours are applied by colours/nvim.lua.
+    return "return {}\n"
+
+
 WIRE = {
     "foot": wire_foot,
     "sway": wire_sway,
     "zsh": wire_zsh,
     "posh": wire_posh,
     "rofi": wire_rofi,
+    "nvim": wire_nvim_init,
+    "colorscheme": wire_colorscheme,
 }
 
 

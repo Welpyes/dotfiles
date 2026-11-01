@@ -5,13 +5,13 @@ final_space = true
 
 [secondary_prompt]
   template = '❯❯ '
-  foreground = '#8A57D6'
+  foreground = '#B08CE0'
   background = 'transparent'
 
 [transient_prompt]
   template = '❯ '
   background = 'transparent'
-  foreground_templates = ['{{if gt .Code 0}}#E04F48{{end}}', '{{if eq .Code 0}}#8A57D6{{end}}']
+  foreground_templates = ['{{if gt .Code 0}}#F2766F{{end}}', '{{if eq .Code 0}}#B08CE0{{end}}']
 
 [[blocks]]
   type = 'prompt'
@@ -20,7 +20,7 @@ final_space = true
 
   [[blocks.segments]]
     template = ' {{ .Path }}'
-    foreground = '#3D84D6'
+    foreground = '#7FB1E6'
     background = 'transparent'
     type = 'path'
     style = 'plain'
@@ -30,8 +30,8 @@ final_space = true
       style = 'full'
 
   [[blocks.segments]]
-    template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <#26A69A{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
-    foreground = '#E9AE0C'
+    template = ' {{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }} <#7CCBC0{{ if gt .Behind 0 }}⇣{{ end }}{{ if gt .Ahead 0 }}⇡{{ end }}</>'
+    foreground = '#FFD54F'
     background = 'transparent'
     type = 'git'
     style = 'plain'
@@ -48,7 +48,7 @@ final_space = true
 
   [[blocks.segments]]
     template = '{{ .FormattedMs }}'
-    foreground = '#E9AE0C'
+    foreground = '#FFD54F'
     background = 'transparent'
     type = 'executiontime'
     style = 'plain'
@@ -67,7 +67,7 @@ final_space = true
     background = 'transparent'
     type = 'text'
     style = 'plain'
-    foreground_templates = ['{{if gt .Code 0}}#E04F48{{end}}', '{{if eq .Code 0}}#8A57D6{{end}}']
+    foreground_templates = ['{{if gt .Code 0}}#F2766F{{end}}', '{{if eq .Code 0}}#B08CE0{{end}}']
 
     [blocks.segments.properties]
       cache_duration = 'none'
