@@ -1,0 +1,346 @@
+diff --git a/AGENTS.md b/AGENTS.md
+new file mode 100644
+index 00000000..5fc7b167
+--- /dev/null
++++ b/AGENTS.md
+@@ -0,0 +1,56 @@
++# swayfx agent notes
++
++Wayland compositor fork of sway with GLES2 effects (blur, shadows, rounded corners). C, meson build. Single repo; builds `sway`, `swaymsg`, `swaybar`, `swaynag`.
++
++## Build & run
++
++Dependencies: meson, ninja, wlroots 0.20 (>=0.20.0, <0.21.0), scenefx 0.5, wayland >=1.21, wayland-protocols >=1.41, pcre2, json-c >=0.13, pango, cairo, pangocairo, xkbcommon >=1.5.0, libdrm, libevdev. Optional: gdk-pixbuf2, libinput, libudev, scdoc (man pages), systemd/elogind/basu (tray).
++
++```
++meson setup build/
++ninja -C build/
++sudo ninja -C build/ install
++```
++
++meson defaults: `werror=true`, `warning_level=2`, `c_std=c11`, `wrap_mode=nodownload`. `build/` is gitignored.
++
++Nix:
++```
++nix build            # -> ./result/bin/sway
++nix develop          # dev shell; copies scenefx to ./subprojects/, adds gdb, disables fortify
++./result/bin/sway
++```
++
++Docker:
++```
++docker compose up --build
++# then copy opt/ files to /usr/local/ (see README "Container (Docker)")
++```
++
++Debian: see INSTALL-deb.md (needs liblcms2, libliftoff, libdisplay-info for wlroots 0.19 backend; run `sudo ldconfig` after install).
++
++No test suite or formatter/linter config in repo. `.editorconfig` only: tabs for C, LF, utf-8.
++
++## Entry points
++
++- `sway/main.c` -> `sway` executable (compositor; IPC server)
++- `swaymsg/main.c` -> `swaymsg` (IPC client)
++- `swaybar/main.c` -> `swaybar` (bar, gated on `swaybar` option)
++- `swaynag/main.c` -> `swaynag` (nag, gated on `swaynag` option)
++- `common/` shared lib (`lib_sway_common`); `include/` public headers
++- `protocols/` wayland protocol XMLs (layer-shell, output-power-management)
++
++Subprojects `wlroots` and `scenefx` fall back to `subprojects/` dir (gitignored). `nix develop` populates `subprojects/scenefx`.
++
++## Code style
++
++C11, POSIX, no GNU extensions. Kernel-style C: brackets on same line, single tab indent, 80 col target (max 100). Global names prefixed `sway_submodule_` (e.g. `sway_output`). Construct/destruct pairs: `init`/`finish` (no alloc) or `create`/`destroy` (malloc/free, destroy accepts NULL). Non-void functions return bool. Include guards: header path relative to `include/`, uppercased. See CONTRIBUTING.md for full style.
++
++## Gotchas
++
++- `werror=true`: warnings fail the build.
++- No logind/seatd: `sudo chmod a+s /usr/local/bin/sway` (sway drops root after startup).
++- `subprojects/`, `result`, `opt/`, `build/` are gitignored.
++- Version string embeds short git commit + branch; only set in a git checkout.
++- Only CI workflow: `.github/workflows/flake-update.yml` (weekly Nix lock update PR).
++- Contributions: pull requests from feature branches; commit subject <= 50 chars; include a test plan. Discuss non-eye-candy features in an issue first (scope is eye-candy).
+diff --git a/include/sway/tree/workspace.h b/include/sway/tree/workspace.h
+index a7da6220..81135023 100644
+--- a/include/sway/tree/workspace.h
++++ b/include/sway/tree/workspace.h
+@@ -59,6 +59,9 @@ struct sway_workspace {
+ 		struct animation animation;
+ 		float from_alpha;
+ 		float to_alpha;
++		float from_x;
++		float to_x;
++		float last_x;
+ 	} animation_state;
+ };
+ 
+diff --git a/sway/desktop/transaction.c b/sway/desktop/transaction.c
+index f7852888..a4eed2fe 100644
+--- a/sway/desktop/transaction.c
++++ b/sway/desktop/transaction.c
+@@ -105,44 +105,97 @@ static void _fade_container_update(struct sway_container *con, void *data) {
+ 	container_update(con);
+ }
+ 
+-static void workspace_fade_update_callback(void *data) {
++// Animated offset (in output pixels) for a workspace during a slide switch.
++static float workspace_slide_x(struct sway_workspace *ws) {
++	if (!ws->animation_state.animation.initialized) {
++		return 0;
++	}
++	return get_animated_value(ws->animation_state.from_x,
++		ws->animation_state.to_x, &ws->animation_state.animation);
++}
++
++static void workspace_slide_update_callback(void *data) {
+ 	struct sway_workspace *ws = data;
+ 	if (!ws || !ws->output) {
+ 		return;
+ 	}
+-	// TODO: needed?
+-	output_configure_scene(ws->output, &ws->layers.tiling->node, false, NULL);
++
++	float x = get_animated_value(ws->animation_state.from_x,
++		ws->animation_state.to_x, &ws->animation_state.animation);
++	float delta = x - ws->animation_state.last_x;
++	ws->animation_state.last_x = x;
++
++	struct wlr_box *area = &ws->output->usable_area;
++	struct side_gaps *gaps = &ws->current_gaps;
++	float base_x = gaps->left + area->x;
++	float base_y = gaps->top + area->y;
++
++	// Slide the whole tiling layer (every tiled window moves together).
++	wlr_scene_node_set_position(&ws->layers.tiling->node, base_x + x, base_y);
++	wlr_scene_node_set_position(&ws->layers.fullscreen->node, base_x + x, base_y);
++
++	// Slide floating containers with the workspace.
++	int lx, ly;
++	for (int i = 0; i < ws->current.floating->length; i++) {
++		struct sway_container *floater = ws->current.floating->items[i];
++		wlr_scene_node_coords(&floater->scene_tree->node, &lx, &ly);
++		wlr_scene_node_set_position(&floater->scene_tree->node, lx + delta, ly);
++	}
++
+ 	workspace_for_each_container(ws, _fade_container_update, NULL);
++	output_configure_scene(ws->output, &ws->layers.tiling->node, false, NULL);
+ }
+ 
+-static void workspace_fade_complete_callback(void *data) {
++static void workspace_slide_complete_callback(void *data) {
+ 	struct sway_workspace *ws = data;
+ 	if (!ws || !ws->output) {
+ 		return;
+ 	}
+ 	struct sway_output *output = ws->output;
++	struct wlr_box *area = &output->usable_area;
++	struct side_gaps *gaps = &ws->current_gaps;
++	float base_x = gaps->left + area->x;
++	float base_y = gaps->top + area->y;
++
++	// Reset the workspace layer position so any container spawned after the
++	// switch is placed at the correct spot, not relative to a stale slide
++	// offset.
++	wlr_scene_node_set_position(&ws->layers.tiling->node, base_x, base_y);
++	wlr_scene_node_set_position(&ws->layers.fullscreen->node, base_x, base_y);
++
+ 	if (output->current.active_workspace == ws) {
++		// Incoming workspace: leave it in place.
++		ws->animation_state.last_x = 0;
++		ws->animation_state.from_x = 0.0f;
++		ws->animation_state.to_x = 0.0f;
+ 		return;
+ 	}
++	// Outgoing workspace: hide it now that it has slid off-screen.
+ 	wlr_scene_node_set_enabled(&ws->layers.tiling->node, false);
+ 	wlr_scene_node_set_enabled(&ws->layers.fullscreen->node, false);
+ 	for (int i = 0; i < ws->current.floating->length; i++) {
+ 		struct sway_container *floater = ws->current.floating->items[i];
+ 		wlr_scene_node_set_enabled(&floater->scene_tree->node, false);
+ 	}
++	ws->animation_state.last_x = 0;
++	ws->animation_state.from_x = 0.0f;
++	ws->animation_state.to_x = 0.0f;
+ }
+ 
+ /* Compensate for scene-graph reparenting by computing the drift between
+  * the last tracked global coordinates and the actual current global position,
+  * then applying that delta to the local scene node position
+ */
+ static void snap_animation_position(struct sway_container *con) {
+ 	int lx, ly;
+ 	wlr_scene_node_coords(&con->scene_tree->node, &lx, &ly);
+-	int global_delta_x = con->animation_state.current_global_x - lx;
+-	int global_delta_y = con->animation_state.current_global_y - ly;
+-	con->animation_state.from_x = con->scene_tree->node.x + global_delta_x;
+-	con->animation_state.from_y = con->scene_tree->node.y + global_delta_y;
++	// Refresh current_global_x from the actual position so the close
++	// animation starts from where the container is now, not from a stale
++	// position captured before a workspace slide offset the layer.
++	con->animation_state.current_global_x = lx;
++	con->animation_state.current_global_y = ly;
++	con->animation_state.from_x = con->scene_tree->node.x;
++	con->animation_state.from_y = con->scene_tree->node.y;
+ }
+ 
+ static void transaction_destroy(struct sway_transaction *transaction) {
+@@ -892,42 +945,104 @@ static void arrange_output(struct sway_output *output, int width, int height) {
+ 		!(old_active->current.fullscreen || new_active->current.fullscreen);
+ 
+ 	if (is_ws_switch) {
+-		new_active->animation_state.from_alpha = 0.0f;
++		// Don't restart a slide that's already in progress (e.g. if
++		// arrange_output is re-entered mid-animation, which would otherwise
++		// snap the new workspace to its final position).
++		if (!old_active->animation_state.animation.initialized &&
++				!new_active->animation_state.animation.initialized) {
++			// Determine slide direction from workspace order on this output.
++			int old_idx = -1, new_idx = -1;
++			for (int i = 0; i < output->current.workspaces->length; i++) {
++				struct sway_workspace *ws = output->current.workspaces->items[i];
++				if (ws == old_active) {
++					old_idx = i;
++				}
++				if (ws == new_active) {
++					new_idx = i;
++				}
++			}
++			// Determine slide direction. Prefer numeric workspace name
++			// comparison so that switching 3->1 slides left regardless of
++			// the order workspaces appear in the output list.
++			int dir = 0;
++			bool old_is_num = old_active->name &&
++				old_active->name[0] >= '0' && old_active->name[0] <= '9';
++			bool new_is_num = new_active->name &&
++				new_active->name[0] >= '0' && new_active->name[0] <= '9';
++			if (old_is_num && new_is_num) {
++				int old_num = atoi(old_active->name);
++				int new_num = atoi(new_active->name);
++				dir = new_num > old_num ? 1 : -1;
++			} else if (old_idx >= 0 && new_idx >= 0 && new_idx != old_idx) {
++				dir = new_idx > old_idx ? 1 : -1;
++			} else if (old_idx == -1 && new_idx >= 0) {
++				// Old workspace was destroyed (was empty). Default to
++				// sliding the new workspace in from the right.
++				dir = 1;
++			}
+ 
+-		if (old_active->current.tiling->length == 0
+-				&& old_active->current.floating->length == 0) {
+-			new_active->animation_state.to_alpha = 1.0f;
+-			add_animation(&new_active->animation_state.animation,
+-				workspace_fade_update_callback, NULL);
+-		} else {
+-			new_active->animation_state.to_alpha = 0.0f;
+-			float current_alpha = get_animated_value(old_active->animation_state.from_alpha,
+-				old_active->animation_state.to_alpha, &old_active->animation_state.animation);
+-			old_active->animation_state.from_alpha = current_alpha;
+-			old_active->animation_state.to_alpha = 0.0f;
++			int width = output->usable_area.width;
++			if (width <= 0) {
++				width = new_active->width;
++			}
++
++			// Outgoing workspace slides away.
++			finish_animation(&old_active->animation_state.animation);
++			old_active->animation_state.last_x = 0;
++			old_active->animation_state.from_alpha = 1.0f;
++			old_active->animation_state.to_alpha = 1.0f;
++			old_active->animation_state.from_x = 0.0f;
++			old_active->animation_state.to_x = -(float)dir * width;
++			add_animation(&old_active->animation_state.animation,
++				workspace_slide_update_callback, workspace_slide_complete_callback);
+ 
++			// Incoming workspace slides in.
+ 			finish_animation(&new_active->animation_state.animation);
+-			new_active->animation_state.from_alpha = 0.0f;
++			new_active->animation_state.last_x = 0;
++			new_active->animation_state.from_alpha = 1.0f;
+ 			new_active->animation_state.to_alpha = 1.0f;
+-
+-			add_animation(&old_active->animation_state.animation,
+-				workspace_fade_update_callback, workspace_fade_complete_callback);
++			new_active->animation_state.from_x = (float)dir * width;
++			new_active->animation_state.to_x = 0.0f;
+ 			add_animation(&new_active->animation_state.animation,
+-				workspace_fade_update_callback, workspace_fade_complete_callback);
++				workspace_slide_update_callback, NULL);
+ 		}
+ 	} else if (old_active && new_active && old_active != new_active
+-			&& output->wlr_output->enabled) {
+-		// Non-animated workspace switch: reset stale fade alpha so the new
+-		// active workspace isn't left fully transparent.
+-		finish_animation(&new_active->animation_state.animation);
+-		new_active->animation_state.from_alpha = 1.0f;
+-		new_active->animation_state.to_alpha = 1.0f;
++		&& output->wlr_output->enabled) {
++		// Non-animated workspace switch: reset stale slide state so the new
++		// active workspace isn't left offset. Only reset when no slide is in
++		// progress, to avoid cutting short an active animation.
++		if (!old_active->animation_state.animation.initialized &&
++				!new_active->animation_state.animation.initialized) {
++			finish_animation(&new_active->animation_state.animation);
++			new_active->animation_state.from_alpha = 1.0f;
++			new_active->animation_state.to_alpha = 1.0f;
++			new_active->animation_state.from_x = 0.0f;
++			new_active->animation_state.to_x = 0.0f;
++			new_active->animation_state.last_x = 0;
+ 
+-		finish_animation(&old_active->animation_state.animation);
+-		old_active->animation_state.from_alpha = 1.0f;
+-		old_active->animation_state.to_alpha = 0.0f;
++			finish_animation(&old_active->animation_state.animation);
++			old_active->animation_state.from_alpha = 1.0f;
++			old_active->animation_state.to_alpha = 0.0f;
++			old_active->animation_state.from_x = 0.0f;
++			old_active->animation_state.to_x = 0.0f;
++			old_active->animation_state.last_x = 0;
++		} else {
++			// A slide is in progress from a previous switch. Finish the old
++			// workspace's animation and hide it, since it is being replaced
++			// by this new switch. Otherwise it would slide to its final
++			// position and stay visible alongside the new workspace.
++			if (old_active->animation_state.animation.initialized) {
++				finish_animation(&old_active->animation_state.animation);
++				workspace_slide_complete_callback(old_active);
++			}
++			if (new_active->animation_state.animation.initialized) {
++				finish_animation(&new_active->animation_state.animation);
++				new_active->animation_state.from_x = 0.0f;
++				new_active->animation_state.to_x = 0.0f;
++				new_active->animation_state.last_x = 0;
++			}
++		}
+ 	}
+-
+ 	for (int i = 0; i < output->current.workspaces->length; i++) {
+ 		struct sway_workspace *child = output->current.workspaces->items[i];
+ 
+@@ -966,23 +1081,25 @@ static void arrange_output(struct sway_output *output, int width, int height) {
+ 				struct side_gaps *gaps = &child->current_gaps;
+ 
+ 				wlr_scene_node_set_position(&child->layers.tiling->node,
+-					gaps->left + area->x, gaps->top + area->y);
++					gaps->left + area->x + workspace_slide_x(child),
++					gaps->top + area->y);
+ 
+ 				arrange_workspace_tiling(child,
+ 					area->width - gaps->left - gaps->right,
+ 					area->height - gaps->top - gaps->bottom);
+ 				arrange_workspace_floating(child);
+ 			}
+ 		} else if (animating && !activated) {
+ 			// Workspace fading out - keep visible, alpha handled by render path
+ 			struct wlr_box *area = &output->usable_area;
+ 			struct side_gaps *gaps = &child->current_gaps;
+ 
+ 			wlr_scene_node_set_enabled(&child->layers.tiling->node, true);
+ 			wlr_scene_node_set_enabled(&child->layers.fullscreen->node, false);
+ 
+ 			wlr_scene_node_set_position(&child->layers.tiling->node,
+-				gaps->left + area->x, gaps->top + area->y);
++				gaps->left + area->x + workspace_slide_x(child),
++				gaps->top + area->y);
+ 
+ 			arrange_workspace_tiling(child,
+ 				area->width - gaps->left - gaps->right,
