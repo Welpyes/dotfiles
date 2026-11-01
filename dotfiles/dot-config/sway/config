@@ -36,7 +36,7 @@ client.focused_inactive #171823 #171823 #5c5c5c #171823 #171823
 #    Eye Candies   #
 ####################
 
-blur enable
+blur disable
 blur_xray enable
 blur_passes 2
 blur_radius 5
@@ -44,13 +44,13 @@ blur_noise 0.1
 
 shadows enable
 shadows_on_csd enable
-shadow_blur_radius 10
-shadow_offset 0 0
+shadow_blur_radius 1
+shadow_offset 10 10
 shadow_color #00000099
 
 default_dim_inactive 0.1
-corner_radius 10
-animation_duration_ms 400
+corner_radius 0
+animation_duration_ms 100
 
 ####################
 #   Applications   #
@@ -148,6 +148,9 @@ bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ 
 bindsym --locked XF86AudioMicMute     exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 bindsym --locked XF86MonBrightnessUp   exec brightnessctl set 5%+
+
+bindgesture swipe:3:right workspace prev
+bindgesture swipe:3:left workspace next
 
 input "type:touchpad" {
   tap enabled
