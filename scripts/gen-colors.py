@@ -257,8 +257,6 @@ GTK_CSS_TEMPLATE = """\
 
 /* Base */
 * {
-    font-family: "Ioskeley Mono";
-    font-size: 10px;
     -GtkWidget-window-decorations: none;
 }
 
@@ -274,7 +272,7 @@ decoration {
     background-color: @surface_alt;
     color: @fg;
     border: 1px solid @border;
-    border-radius: 6px;
+    border-radius: 0px;
 }
 
 .titlebar {
@@ -287,8 +285,8 @@ decoration {
     background-color: transparent;
     color: @fg;
     border: none;
-    border-radius: 4px;
-    padding: 6px;
+    border-radius: 0px;
+    padding: 5px;
 }
 
 .titlebutton:hover {
@@ -304,9 +302,9 @@ button {
     background-color: @surface;
     color: @fg;
     border: 1px solid @border;
-    border-radius: 4px;
+    border-radius: 0px;
     padding: 4px 10px;
-    min-height: 26px;
+    min-height: 28px;
     transition: all 120ms ease-in-out;
 }
 
@@ -351,7 +349,7 @@ button.destructive-action:hover {
 button.flat {
     background-color: transparent;
     border: none;
-    border-radius: 4px;
+    border-radius: 0px;
 }
 
 /* Entries & text */
@@ -362,9 +360,9 @@ comboboxentry {
     background-color: @surface;
     color: @fg;
     border: 1px solid @border;
-    border-radius: 4px;
-    padding: 4px 6px;
-    min-height: 26px;
+    border-radius: 0px;
+    padding: 4px 8px;
+    min-height: 28px;
 }
 
 entry:focus,
@@ -396,14 +394,14 @@ menu {
     background-color: @surface;
     color: @fg;
     border: 1px solid @border;
-    border-radius: 4px;
+    border-radius: 0px;
 }
 
 menuitem {
     background-color: transparent;
     color: @fg;
-    padding: 6px 10px;
-    border-radius: 4px;
+    padding: 4px 10px;
+    border-radius: 0px;
 }
 
 menuitem:hover {
@@ -437,8 +435,8 @@ notebook tab {
     background-color: @surface_alt;
     color: @muted;
     border-bottom: 2px solid transparent;
-    padding: 6px 10px;
-    border-radius: 4px 4px 0 0;
+    padding: 4px 10px;
+    border-radius: 0px;
 }
 
 notebook tab:hover {
@@ -455,7 +453,7 @@ notebook tab:selected {
 /* Frame */
 frame {
     border: 1px solid @border;
-    border-radius: 6px;
+    border-radius: 0px;
     padding: 8px;
     background-color: @surface;
 }
@@ -474,7 +472,7 @@ spinbutton button,
 scale trough {
     background-color: @surface_alt;
     color: @fg;
-    border-radius: 4px;
+    border-radius: 0px;
 }
 
 scale trough {
@@ -485,9 +483,9 @@ scale trough {
 scale slider {
     background-color: @accent;
     border: none;
-    border-radius: 4px;
-    min-width: 14px;
-    min-height: 14px;
+    border-radius: 0px;
+    min-width: 12px;
+    min-height: 12px;
 }
 
 .scale:highlight slider {
@@ -505,9 +503,9 @@ scrollbar {
 scrollbar slider {
     background-color: @muted;
     border: none;
-    border-radius: 6px;
+    border-radius: 0px;
     min-width: 10px;
-    min-height: 30px;
+    min-height: 24px;
 }
 
 scrollbar slider:hover {
@@ -529,7 +527,7 @@ tooltip {
     background-color: @surface_alt;
     color: @fg;
     border: 1px solid @border;
-    border-radius: 4px;
+    border-radius: 0px;
     padding: 6px;
 }
 
@@ -538,7 +536,7 @@ popover {
     background-color: @surface;
     color: @fg;
     border: 1px solid @border;
-    border-radius: 6px;
+    border-radius: 0px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
@@ -548,7 +546,7 @@ listview {
     background-color: @surface;
     color: @fg;
     border: 1px solid @border;
-    border-radius: 4px;
+    border-radius: 0px;
 }
 
 treeview:selected,
@@ -597,12 +595,12 @@ listview:focus:selected {
     background-color: @surface_alt;
     color: @fg;
     border: 1px solid @border;
-    border-radius: 4px;
+    border-radius: 0px;
 }
 
 .infobar {
     border: none;
-    border-radius: 4px;
+    border-radius: 0px;
     padding: 6px;
 }
 
