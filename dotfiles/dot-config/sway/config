@@ -13,7 +13,7 @@ set $term foot
 floating_modifier $mod 
 
 ### Output
-output * mode 1366x768@60Hz bg ~/.config/sway/wallpapers/kazusa-aestethyeah.jpeg fill
+output * mode 1366x768@60Hz bg ~/.config/sway/wallpapers/Kazusagosling.jpg fill
 seat * xcursor_theme Kyoyama-Kazusa 16
 
 Xwayland enable
@@ -47,7 +47,7 @@ shadows enable
 shadows_on_csd enable
 shadow_blur_radius 1
 shadow_offset 10 10
-shadow_color #00000099
+shadow_color #5C4136DD
 
 default_dim_inactive 0.1
 corner_radius 0
