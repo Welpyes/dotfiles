@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=WelpTheme
+Comment=GTK theme generated from pallete.json (sweet-blush)
+X-GNOME-Metatheme-GTK3=gtk-3.0
+X-GNOME-Metatheme-GTK4=gtk-4.0
+
+[Settings]
+gtk-application-prefer-dark-theme=false
+

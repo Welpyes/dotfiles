@@ -78,7 +78,13 @@ def hex_of(key: str) -> str:
 
 
 def colours() -> dict:
-    return {role: hex_of(key) for role, key in ROLES.items()}
+    c = {role: hex_of(key) for role, key in ROLES.items()}
+    # expose palette keys directly too (e.g. muted -> c["muted"])
+    palette = load_palette()
+    for key in palette:
+        if key not in c:
+            c[key] = hex_of(key)
+    return c
 
 
 # --------------------------------------------------------------------------- #
@@ -198,6 +204,463 @@ return M
 """
 
 
+# --------------------------------------------------------------------------- #
+# GTK theme (dotfiles/dot-themes/welptheme/)
+# --------------------------------------------------------------------------- #
+
+THEME_DIR = REPO_ROOT / "dotfiles" / "dot-themes" / "welptheme"
+
+GTK_CSS_TEMPLATE = """\
+/* {GEN_NOTE} */
+/* WelpTheme — generated from pallete.json. GTK3 + GTK4. DO NOT EDIT BY HAND. */
+
+@define-color bg {bg};
+@define-color fg {fg};
+@define-color fg_dim {fg_dim};
+@define-color fg_dark {fg_dark};
+@define-color surface {surface};
+@define-color surface_alt {surface_alt};
+@define-color border {border};
+@define-color muted {muted};
+
+@define-color accent {accent};
+@define-color accent_light {accent_light};
+@define-color accent_dark {accent_dark};
+
+@define-color success {success};
+@define-color success_light {success_light};
+@define-color success_dark {success_dark};
+
+@define-color warn {warn};
+@define-color warn_light {warn_light};
+@define-color warn_dark {warn_dark};
+
+@define-color error {error};
+@define-color error_light {error_light};
+@define-color error_dark {error_dark};
+
+@define-color info {info};
+@define-color info_light {info_light};
+@define-color info_dark {info_dark};
+
+@define-color pink {pink};
+@define-color pink_light {pink_light};
+@define-color pink_dark {pink_dark};
+
+@define-color orange {orange};
+@define-color orange_light {orange_light};
+@define-color orange_dark {orange_dark};
+
+@define-color teal {teal};
+@define-color teal_light {teal_light};
+@define-color teal_dark {teal_dark};
+
+/* Base */
+* {
+    font-family: "Ioskeley Mono";
+    font-size: 10px;
+    -GtkWidget-window-decorations: none;
+}
+
+window {
+    background-color: @bg;
+    color: @fg;
+    border-color: @border;
+}
+
+window.csd,
+window.ssd,
+decoration {
+    background-color: @surface_alt;
+    color: @fg;
+    border: 1px solid @border;
+    border-radius: 6px;
+}
+
+.titlebar {
+    background-color: @surface_alt;
+    color: @fg;
+    border-bottom: 1px solid @border;
+}
+
+.titlebutton {
+    background-color: transparent;
+    color: @fg;
+    border: none;
+    border-radius: 4px;
+    padding: 6px;
+}
+
+.titlebutton:hover {
+    background-color: @surface;
+}
+
+.titlebutton:active {
+    background-color: @muted;
+}
+
+/* Buttons */
+button {
+    background-color: @surface;
+    color: @fg;
+    border: 1px solid @border;
+    border-radius: 4px;
+    padding: 4px 10px;
+    min-height: 26px;
+    transition: all 120ms ease-in-out;
+}
+
+button:hover {
+    background-color: @surface_alt;
+    border-color: @muted;
+}
+
+button:focus {
+    border-color: @accent;
+    outline: none;
+}
+
+button:checked,
+button:selected,
+button:active {
+    background-color: @accent;
+    color: @bg;
+    border-color: @accent_dark;
+}
+
+button.suggested-action {
+    background-color: @success;
+    color: #141210;
+    border-color: @success_dark;
+}
+
+button.suggested-action:hover {
+    background-color: @success_light;
+}
+
+button.destructive-action {
+    background-color: @error;
+    color: #FFFFFF;
+    border-color: @error_dark;
+}
+
+button.destructive-action:hover {
+    background-color: @error_dark;
+}
+
+button.flat {
+    background-color: transparent;
+    border: none;
+    border-radius: 4px;
+}
+
+/* Entries & text */
+entry,
+textview,
+spinbutton,
+comboboxentry {
+    background-color: @surface;
+    color: @fg;
+    border: 1px solid @border;
+    border-radius: 4px;
+    padding: 4px 6px;
+    min-height: 26px;
+}
+
+entry:focus,
+textview:focus,
+spinbutton:focus,
+comboboxentry:focus {
+    border-color: @accent;
+}
+
+entry:disabled,
+textview:disabled {
+    background-color: @surface_alt;
+    color: @muted;
+}
+
+.selection {
+    background-color: @accent;
+    color: @bg;
+}
+
+/* Menu */
+menubar {
+    background-color: @surface;
+    color: @fg;
+    border-bottom: 1px solid @border;
+}
+
+menu {
+    background-color: @surface;
+    color: @fg;
+    border: 1px solid @border;
+    border-radius: 4px;
+}
+
+menuitem {
+    background-color: transparent;
+    color: @fg;
+    padding: 6px 10px;
+    border-radius: 4px;
+}
+
+menuitem:hover {
+    background-color: @accent_light;
+    color: @bg;
+}
+
+menuitem:selected {
+    background-color: @accent;
+    color: @bg;
+}
+
+menuitem:disabled {
+    color: @muted;
+}
+
+/* Toolbar */
+toolbar {
+    background-color: @surface;
+    color: @fg;
+    border-bottom: 1px solid @border;
+}
+
+/* Notebook / tabs */
+notebook {
+    background-color: @surface;
+    border: none;
+}
+
+notebook tab {
+    background-color: @surface_alt;
+    color: @muted;
+    border-bottom: 2px solid transparent;
+    padding: 6px 10px;
+    border-radius: 4px 4px 0 0;
+}
+
+notebook tab:hover {
+    background-color: @surface;
+    color: @fg;
+}
+
+notebook tab:selected {
+    background-color: @surface;
+    color: @fg;
+    border-bottom: 2px solid @accent;
+}
+
+/* Frame */
+frame {
+    border: 1px solid @border;
+    border-radius: 6px;
+    padding: 8px;
+    background-color: @surface;
+}
+
+.label {
+    color: @fg;
+}
+
+.label:disabled,
+.label .dim-label {
+    color: @muted;
+}
+
+/* Spinbutton / scale */
+spinbutton button,
+scale trough {
+    background-color: @surface_alt;
+    color: @fg;
+    border-radius: 4px;
+}
+
+scale trough {
+    border: none;
+    min-height: 6px;
+}
+
+scale slider {
+    background-color: @accent;
+    border: none;
+    border-radius: 4px;
+    min-width: 14px;
+    min-height: 14px;
+}
+
+.scale:highlight slider {
+    background-color: @accent_light;
+}
+
+/* Scrollbar */
+scrollbar {
+    background-color: transparent;
+    border: none;
+    min-width: 12px;
+    min-height: 12px;
+}
+
+scrollbar slider {
+    background-color: @muted;
+    border: none;
+    border-radius: 6px;
+    min-width: 10px;
+    min-height: 30px;
+}
+
+scrollbar slider:hover {
+    background-color: @fg_dim;
+}
+
+/* ScrolledWindow / Viewport */
+scrolledwindow {
+    border: none;
+    background-color: @surface;
+}
+
+viewport {
+    background-color: @surface;
+}
+
+/* Tooltip */
+tooltip {
+    background-color: @surface_alt;
+    color: @fg;
+    border: 1px solid @border;
+    border-radius: 4px;
+    padding: 6px;
+}
+
+/* Popover */
+popover {
+    background-color: @surface;
+    color: @fg;
+    border: 1px solid @border;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Tree / list view */
+treeview,
+listview {
+    background-color: @surface;
+    color: @fg;
+    border: 1px solid @border;
+    border-radius: 4px;
+}
+
+treeview:selected,
+listview:selected {
+    background-color: @accent;
+    color: @bg;
+}
+
+treeview:focus:selected,
+listview:focus:selected {
+    background-color: @accent_dark;
+    color: @bg;
+}
+
+.treeview row:selected,
+.listview row:selected {
+    background-color: @accent;
+    color: @bg;
+}
+
+/* Header / dec */
+.header-bar {
+    background-color: @surface_alt;
+    color: @fg;
+    border-bottom: 1px solid @border;
+}
+
+.entry .linked,
+.entry:linked {
+    color: @accent;
+}
+
+.sidebar {
+    background-color: @surface_alt;
+    color: @fg;
+    border-right: 1px solid @border;
+}
+
+.sidebar row:selected {
+    background-color: @accent;
+    color: @bg;
+}
+
+.flat-tooltip,
+.tooltip {
+    background-color: @surface_alt;
+    color: @fg;
+    border: 1px solid @border;
+    border-radius: 4px;
+}
+
+.infobar {
+    border: none;
+    border-radius: 4px;
+    padding: 6px;
+}
+
+.infobar.warning {
+    background-color: @warn_light;
+    color: @warn_dark;
+}
+
+.infobar.error {
+    background-color: @error_light;
+    color: @error_dark;
+}
+
+.infobar.info {
+    background-color: @info_light;
+    color: @info_dark;
+}
+
+.infobar.question,
+.infobar.other {
+    background-color: @info_light;
+    color: @info_dark;
+}
+
+.statusbar {
+    background-color: @surface_alt;
+    color: @fg_dim;
+    border-top: 1px solid @border;
+}
+
+.gtk-theme-name {
+    /* placeholder for theme engine compat */
+}
+"""
+
+
+def gen_gtk(c: dict) -> dict:
+    css = GTK_CSS_TEMPLATE
+    css = css.replace("{GEN_NOTE}", GEN_NOTE)
+    # replace {role} placeholders with #hex (CSS braces are left alone since
+    # they are never directly followed by a role name).
+    for role, value in c.items():
+        css = css.replace("{" + role + "}", f"#{value}")
+    return {
+        "index.theme": "[Desktop Entry]\n"
+        "Type=X-GNOME-Metatheme\n"
+        "Name=WelpTheme\n"
+        "Comment=GTK theme generated from pallete.json (sweet-blush)\n"
+        "X-GNOME-Metatheme-GTK3=gtk-3.0\n"
+        "X-GNOME-Metatheme-GTK4=gtk-4.0\n"
+        "\n[Settings]\n"
+        "gtk-application-prefer-dark-theme=false\n"
+        "\n",
+        "gtk-3.0/gtk.css": css,
+        "gtk-4.0/gtk.css": css,
+    }
+
+
 # Standard vim/nvim highlight groups -> palette roles.
 _NVIM_HIGHLIGHTS = {
     "Normal": {"fg": "fg", "bg": "bg"},
@@ -297,6 +760,7 @@ GENERATORS = {
     "rofi": ("rofi.rasi", gen_rofi),
     "posh": ("posh.toml", gen_posh),
     "nvim": ("nvim.lua", gen_nvim),
+    "gtk": (None, gen_gtk),
 }
 
 HOSTS = {
@@ -316,11 +780,21 @@ HOSTS = {
 
 def generate() -> None:
     COLOURS_DIR.mkdir(parents=True, exist_ok=True)
+    THEME_DIR.mkdir(parents=True, exist_ok=True)
     c = colours()
     for name, (fname, fn) in GENERATORS.items():
-        out = COLOURS_DIR / fname
-        out.write_text(fn(c), encoding="utf-8")
-        print(f"wrote {out}")
+        result = fn(c)
+        if isinstance(result, dict):
+            # multi-file generator (gtk theme) -> write under THEME_DIR
+            for rel_path, content in result.items():
+                out = THEME_DIR / rel_path
+                out.parent.mkdir(parents=True, exist_ok=True)
+                out.write_text(content, encoding="utf-8")
+                print(f"wrote {out}")
+        else:
+            out = COLOURS_DIR / fname
+            out.write_text(result, encoding="utf-8")
+            print(f"wrote {out}")
 
 
 # --------------------------------------------------------------------------- #
@@ -526,10 +1000,17 @@ def check() -> None:
     problems = []
     if not PALETTE.exists():
         problems.append(f"missing {PALETTE}")
-    for name, (fname, _) in GENERATORS.items():
-        out = COLOURS_DIR / fname
-        if not out.exists():
-            problems.append(f"missing {out}")
+    for name, (fname, fn) in GENERATORS.items():
+        result = fn(c)
+        if isinstance(result, dict):
+            for rel_path in result:
+                out = THEME_DIR / rel_path
+                if not out.exists():
+                    problems.append(f"missing {out}")
+        else:
+            out = COLOURS_DIR / fname
+            if not out.exists():
+                problems.append(f"missing {out}")
     for name, path in HOSTS.items():
         if not path.exists():
             problems.append(f"missing host {path}")
