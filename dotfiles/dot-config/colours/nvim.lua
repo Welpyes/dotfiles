@@ -14,11 +14,11 @@ M.colors = {
   error = "#F2766F",
   error_dark = "#C8453F",
   error_light = "#FFC9C4",
-  fg = "#8A6A5C",
-  fg_dark = "#5C4136",
+  fg = "#5C4136",
+  fg_dark = "#33221b",
   fg_dim = "#C9A58F",
-  foreground = "#8A6A5C",
-  foreground_dark = "#5C4136",
+  foreground = "#5C4136",
+  foreground_dark = "#33221b",
   green = "#8FCB7E",
   green_dark = "#4E9A55",
   green_light = "#CDEBC5",
@@ -67,9 +67,9 @@ function M.setup()
   end
   vim.g.colors_name = "sweet-blush"
   local c = M.colors
-  hl("Normal", {fg = "#8A6A5C", bg = "#FFF8F0"})
-  hl("NormalNC", {fg = "#8A6A5C", bg = "#F5E1D0"})
-  hl("NormalFloat", {fg = "#8A6A5C", bg = "#FDEFE2"})
+  hl("Normal", {fg = "#5C4136", bg = "#FFF8F0"})
+  hl("NormalNC", {fg = "#5C4136", bg = "#F5E1D0"})
+  hl("NormalFloat", {fg = "#5C4136", bg = "#FDEFE2"})
   hl("LineNr", {fg = "#C9A58F", bg = "#FDEFE2"})
   hl("CursorLineNr", {fg = "#7FB1E6", bg = "#FDEFE2", bold = True})
   hl("CursorLine", {bg = "#FDEFE2"})
@@ -89,7 +89,7 @@ function M.setup()
   hl("Conditional", {fg = "#F2766F"})
   hl("Repeat", {fg = "#F2766F"})
   hl("Label", {fg = "#FFA866"})
-  hl("Operator", {fg = "#8A6A5C"})
+  hl("Operator", {fg = "#5C4136"})
   hl("Keyword", {fg = "#F2766F"})
   hl("Exception", {fg = "#F2766F"})
   hl("PreProc", {fg = "#F59BB8"})
@@ -112,30 +112,30 @@ function M.setup()
   hl("Error", {fg = "#F2766F", bg = "#FFC9C4"})
   hl("Todo", {fg = "#FFD54F", bold = True})
   hl("Title", {fg = "#7FB1E6", bold = True})
-  hl("Pmenu", {fg = "#8A6A5C", bg = "#FDEFE2"})
+  hl("Pmenu", {fg = "#5C4136", bg = "#FDEFE2"})
   hl("PmenuSel", {fg = "#FFF8F0", bg = "#7FB1E6"})
   hl("PmenuSbar", {bg = "#F5E1D0"})
   hl("PmenuThumb", {bg = "#E8CDB8"})
   hl("StatusLine", {fg = "#C9A58F", bg = "#E8CDB8"})
   hl("StatusLineNC", {fg = "#C9A58F", bg = "#F5E1D0"})
   hl("TabLine", {fg = "#C9A58F", bg = "#F5E1D0"})
-  hl("TabLineSel", {fg = "#8A6A5C", bg = "#FFF8F0"})
+  hl("TabLineSel", {fg = "#5C4136", bg = "#FFF8F0"})
   hl("TabLineFill", {bg = "#FDEFE2"})
   hl("VertSplit", {fg = "#E8CDB8"})
   hl("WinSeparator", {fg = "#E8CDB8"})
   hl("Folded", {fg = "#C9A58F", bg = "#F5E1D0"})
   hl("FoldColumn", {fg = "#C9A58F", bg = "#FDEFE2"})
-  hl("SignColumn", {fg = "#8A6A5C", bg = "#FDEFE2"})
-  hl("Cursor", {fg = "#FFF8F0", bg = "#8A6A5C"})
-  hl("iCursor", {fg = "#8A6A5C", bg = "#FFF8F0"})
-  hl("vCursor", {fg = "#8A6A5C", bg = "#FFF8F0"})
+  hl("SignColumn", {fg = "#5C4136", bg = "#FDEFE2"})
+  hl("Cursor", {fg = "#FFF8F0", bg = "#5C4136"})
+  hl("iCursor", {fg = "#5C4136", bg = "#FFF8F0"})
+  hl("vCursor", {fg = "#5C4136", bg = "#FFF8F0"})
   hl("MatchParen", {fg = "#7FB1E6", bold = True})
   hl("NonText", {fg = "#C9A58F"})
   hl("SpecialKey", {fg = "#C9A58F"})
   hl("Directory", {fg = "#7FB1E6"})
   hl("ErrorMsg", {fg = "#F2766F"})
   hl("WarningMsg", {fg = "#FFD54F"})
-  hl("ModeMsg", {fg = "#8A6A5C"})
+  hl("ModeMsg", {fg = "#5C4136"})
   hl("MoreMsg", {fg = "#8FCB7E"})
   hl("DiagnosticError", {fg = "#F2766F"})
   hl("DiagnosticWarn", {fg = "#FFD54F"})
@@ -146,7 +146,7 @@ function M.setup()
   hl("DiagnosticUnderlineWarn", {sp = "#FFD54F", undercurl = True})
   hl("DiagnosticUnderlineInfo", {sp = "#B08CE0", undercurl = True})
   hl("DiagnosticUnderlineHint", {sp = "#7CCBC0", undercurl = True})
-  hl("@variable", {fg = "#8A6A5C"})
+  hl("@variable", {fg = "#5C4136"})
   hl("@parameter", {fg = "#FFA866"})
   hl("@property", {fg = "#7CCBC0"})
   hl("@function", {fg = "#7FB1E6"})

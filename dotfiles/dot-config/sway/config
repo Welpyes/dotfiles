@@ -64,7 +64,7 @@ bindsym $alt+space       exec rofi -show drun -theme ~/.config/rofi/dmenu.rasi -
 bindsym $alt+Tab         exec rofi -show window -theme ~/.config/rofi/dmenu.rasi -wayland 
 bindsym $alt+r           exec rofi -show run -theme ~/.config/rofi/dmenu.rasi -wayland
 
-bindsym $alt+e       exec nautilus
+bindsym $alt+e       exec pcmanfm
 
 ####################
 #   Window mgmt    #
@@ -162,7 +162,7 @@ input "type:pointer" {
   pointer_accel -0.10
 }
 
-exec autotiling-rs
+exec autotiling
 exec pipewire
 # exec pactl load-module module-null-sink sink_name=virtual_mic
 # exec pactl load-module module-remap-source master=virtual_mic.monitor source_name=virtual_mic_source

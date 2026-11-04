@@ -5,8 +5,8 @@
   "surface_alt": "#F5E1D0",
   "border": "#E8CDB8",
   "muted": "#C9A58F",
-  "foreground": "#8A6A5C",
-  "foreground_dark": "#5C4136",
+  "foreground": "#5C4136",
+  "foreground_dark": "#33221b",
 
   "red_light": "#FFC9C4",
   "red": "#F2766F",
