@@ -38,7 +38,7 @@ default_border pixel 2
 ####################
 
 blur disable
-blur_xray enable
+blur_xray disable
 blur_passes 2
 blur_radius 5
 blur_noise 0.1
@@ -60,7 +60,7 @@ animation_duration_ms 100
 bindsym $alt+Return       exec $term
 bindsym $alt+Shift+Return exec $term
 
-bindsym $alt+space       exec rofi -show drun -theme ~/.config/rofi/dmenu.rasi -wayland
+bindsym $alt+space       exec noctalia msg panel-toggle launcher
 bindsym $alt+Tab         exec rofi -show window -theme ~/.config/rofi/dmenu.rasi -wayland 
 bindsym $alt+r           exec rofi -show run -theme ~/.config/rofi/dmenu.rasi -wayland
 
@@ -164,6 +164,7 @@ input "type:pointer" {
 
 exec autotiling
 exec pipewire
+exec noctalia
 # exec pactl load-module module-null-sink sink_name=virtual_mic
 # exec pactl load-module module-remap-source master=virtual_mic.monitor source_name=virtual_mic_source
 # exec pactl load-module module-null-sink sink_name=obs_mic
