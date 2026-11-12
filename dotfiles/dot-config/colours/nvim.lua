@@ -2,57 +2,57 @@
 local M = {}
 
 M.colors = {
-  accent = "#7FB1E6",
-  accent_dark = "#3D6FB5",
-  accent_light = "#C6DFF5",
-  background = "#FFF8F0",
-  bg = "#FFF8F0",
-  blue = "#7FB1E6",
-  blue_dark = "#3D6FB5",
-  blue_light = "#C6DFF5",
-  border = "#E8CDB8",
-  error = "#F2766F",
-  error_dark = "#C8453F",
-  error_light = "#FFC9C4",
-  fg = "#5C4136",
-  fg_dark = "#33221b",
-  fg_dim = "#C9A58F",
-  foreground = "#5C4136",
-  foreground_dark = "#33221b",
-  green = "#8FCB7E",
-  green_dark = "#4E9A55",
-  green_light = "#CDEBC5",
-  info = "#B08CE0",
-  info_dark = "#7B52B8",
-  info_light = "#DCCBF2",
-  muted = "#C9A58F",
-  orange = "#FFA866",
-  orange_dark = "#D9772B",
-  orange_light = "#FFD9B8",
-  pink = "#F59BB8",
-  pink_dark = "#D0638A",
-  pink_light = "#FFD6E2",
-  purple = "#B08CE0",
-  purple_dark = "#7B52B8",
-  purple_light = "#DCCBF2",
-  red = "#F2766F",
-  red_dark = "#C8453F",
-  red_light = "#FFC9C4",
-  success = "#8FCB7E",
-  success_dark = "#4E9A55",
-  success_light = "#CDEBC5",
-  surface = "#FDEFE2",
-  surface_alt = "#F5E1D0",
-  teal = "#7CCBC0",
-  teal_dark = "#3B9A94",
-  teal_light = "#C4EAE4",
-  warn = "#FFD54F",
-  warn_dark = "#D9A520",
-  warn_light = "#FFEDA8",
-  white = "#FFFFFF",
-  yellow = "#FFD54F",
-  yellow_dark = "#D9A520",
-  yellow_light = "#FFEDA8"
+  accent = "#7aa2f7",
+  accent_dark = "#3d59a1",
+  accent_light = "#b4c9fa",
+  background = "#1a1b26",
+  bg = "#1a1b26",
+  blue = "#7aa2f7",
+  blue_dark = "#3d59a1",
+  blue_light = "#b4c9fa",
+  border = "#3b4261",
+  error = "#f7768e",
+  error_dark = "#db4b4b",
+  error_light = "#ff9caf",
+  fg = "#a9b1d6",
+  fg_dark = "#787c99",
+  fg_dim = "#565f89",
+  foreground = "#a9b1d6",
+  foreground_dark = "#787c99",
+  green = "#9ece6a",
+  green_dark = "#6f9a43",
+  green_light = "#bde392",
+  info = "#bb9af7",
+  info_dark = "#9d7cd8",
+  info_light = "#d3bcfa",
+  muted = "#565f89",
+  orange = "#ff9e64",
+  orange_dark = "#d9733a",
+  orange_light = "#ffc19a",
+  pink = "#ff7eb6",
+  pink_dark = "#ff007c",
+  pink_light = "#ffb0d3",
+  purple = "#bb9af7",
+  purple_dark = "#9d7cd8",
+  purple_light = "#d3bcfa",
+  red = "#f7768e",
+  red_dark = "#db4b4b",
+  red_light = "#ff9caf",
+  success = "#9ece6a",
+  success_dark = "#6f9a43",
+  success_light = "#bde392",
+  surface = "#24283b",
+  surface_alt = "#292e42",
+  teal = "#1abc9c",
+  teal_dark = "#0f8a74",
+  teal_light = "#73daca",
+  warn = "#e0af68",
+  warn_dark = "#b8893f",
+  warn_light = "#ecc995",
+  white = "#c0caf5",
+  yellow = "#e0af68",
+  yellow_dark = "#b8893f",
+  yellow_light = "#ecc995"
 }
 
 local function hl(group, opts)
@@ -67,94 +67,94 @@ function M.setup()
   end
   vim.g.colors_name = "sweet-blush"
   local c = M.colors
-  hl("Normal", {fg = "#5C4136", bg = "#FFF8F0"})
-  hl("NormalNC", {fg = "#5C4136", bg = "#F5E1D0"})
-  hl("NormalFloat", {fg = "#5C4136", bg = "#FDEFE2"})
-  hl("LineNr", {fg = "#C9A58F", bg = "#FDEFE2"})
-  hl("CursorLineNr", {fg = "#7FB1E6", bg = "#FDEFE2", bold = True})
-  hl("CursorLine", {bg = "#FDEFE2"})
-  hl("Visual", {bg = "#F5E1D0"})
-  hl("Search", {fg = "#FFF8F0", bg = "#7FB1E6"})
-  hl("IncSearch", {fg = "#FFF8F0", bg = "#FFA866"})
-  hl("Comment", {fg = "#C9A58F", italic = False})
+  hl("Normal", {fg = "#a9b1d6", bg = "#1a1b26"})
+  hl("NormalNC", {fg = "#a9b1d6", bg = "#292e42"})
+  hl("NormalFloat", {fg = "#a9b1d6", bg = "#24283b"})
+  hl("LineNr", {fg = "#565f89", bg = "#24283b"})
+  hl("CursorLineNr", {fg = "#7aa2f7", bg = "#24283b", bold = True})
+  hl("CursorLine", {bg = "#24283b"})
+  hl("Visual", {bg = "#292e42"})
+  hl("Search", {fg = "#1a1b26", bg = "#7aa2f7"})
+  hl("IncSearch", {fg = "#1a1b26", bg = "#ff9e64"})
+  hl("Comment", {fg = "#565f89", italic = False})
   hl("@comment", {link = 'Comment'})
-  hl("Constant", {fg = "#F2766F"})
-  hl("String", {fg = "#8FCB7E"})
-  hl("Character", {fg = "#8FCB7E"})
-  hl("Number", {fg = "#F59BB8"})
-  hl("Boolean", {fg = "#F59BB8"})
-  hl("Identifier", {fg = "#7FB1E6"})
-  hl("Function", {fg = "#7FB1E6"})
-  hl("Statement", {fg = "#F2766F"})
-  hl("Conditional", {fg = "#F2766F"})
-  hl("Repeat", {fg = "#F2766F"})
-  hl("Label", {fg = "#FFA866"})
-  hl("Operator", {fg = "#5C4136"})
-  hl("Keyword", {fg = "#F2766F"})
-  hl("Exception", {fg = "#F2766F"})
-  hl("PreProc", {fg = "#F59BB8"})
-  hl("Include", {fg = "#F59BB8"})
-  hl("Define", {fg = "#F59BB8"})
-  hl("Macro", {fg = "#F59BB8"})
-  hl("PreCondit", {fg = "#F59BB8"})
-  hl("Type", {fg = "#7CCBC0"})
-  hl("StorageClass", {fg = "#7CCBC0"})
-  hl("Structure", {fg = "#7CCBC0"})
-  hl("Typedef", {fg = "#7CCBC0"})
-  hl("Special", {fg = "#FFA866"})
-  hl("SpecialChar", {fg = "#FFA866"})
-  hl("Tag", {fg = "#F59BB8"})
-  hl("Delimiter", {fg = "#C9A58F"})
-  hl("SpecialComment", {fg = "#C9A58F"})
-  hl("Debug", {fg = "#F2766F"})
-  hl("Underlined", {fg = "#7CCBC0", underline = True})
-  hl("Ignore", {fg = "#C9A58F"})
-  hl("Error", {fg = "#F2766F", bg = "#FFC9C4"})
-  hl("Todo", {fg = "#FFD54F", bold = True})
-  hl("Title", {fg = "#7FB1E6", bold = True})
-  hl("Pmenu", {fg = "#5C4136", bg = "#FDEFE2"})
-  hl("PmenuSel", {fg = "#FFF8F0", bg = "#7FB1E6"})
-  hl("PmenuSbar", {bg = "#F5E1D0"})
-  hl("PmenuThumb", {bg = "#E8CDB8"})
-  hl("StatusLine", {fg = "#C9A58F", bg = "#E8CDB8"})
-  hl("StatusLineNC", {fg = "#C9A58F", bg = "#F5E1D0"})
-  hl("TabLine", {fg = "#C9A58F", bg = "#F5E1D0"})
-  hl("TabLineSel", {fg = "#5C4136", bg = "#FFF8F0"})
-  hl("TabLineFill", {bg = "#FDEFE2"})
-  hl("VertSplit", {fg = "#E8CDB8"})
-  hl("WinSeparator", {fg = "#E8CDB8"})
-  hl("Folded", {fg = "#C9A58F", bg = "#F5E1D0"})
-  hl("FoldColumn", {fg = "#C9A58F", bg = "#FDEFE2"})
-  hl("SignColumn", {fg = "#5C4136", bg = "#FDEFE2"})
-  hl("Cursor", {fg = "#FFF8F0", bg = "#5C4136"})
-  hl("iCursor", {fg = "#5C4136", bg = "#FFF8F0"})
-  hl("vCursor", {fg = "#5C4136", bg = "#FFF8F0"})
-  hl("MatchParen", {fg = "#7FB1E6", bold = True})
-  hl("NonText", {fg = "#C9A58F"})
-  hl("SpecialKey", {fg = "#C9A58F"})
-  hl("Directory", {fg = "#7FB1E6"})
-  hl("ErrorMsg", {fg = "#F2766F"})
-  hl("WarningMsg", {fg = "#FFD54F"})
-  hl("ModeMsg", {fg = "#5C4136"})
-  hl("MoreMsg", {fg = "#8FCB7E"})
-  hl("DiagnosticError", {fg = "#F2766F"})
-  hl("DiagnosticWarn", {fg = "#FFD54F"})
-  hl("DiagnosticInfo", {fg = "#B08CE0"})
-  hl("DiagnosticHint", {fg = "#7CCBC0"})
-  hl("DiagnosticOk", {fg = "#8FCB7E"})
-  hl("DiagnosticUnderlineError", {sp = "#F2766F", undercurl = True})
-  hl("DiagnosticUnderlineWarn", {sp = "#FFD54F", undercurl = True})
-  hl("DiagnosticUnderlineInfo", {sp = "#B08CE0", undercurl = True})
-  hl("DiagnosticUnderlineHint", {sp = "#7CCBC0", undercurl = True})
-  hl("@variable", {fg = "#5C4136"})
-  hl("@parameter", {fg = "#FFA866"})
-  hl("@property", {fg = "#7CCBC0"})
-  hl("@function", {fg = "#7FB1E6"})
-  hl("@keyword", {fg = "#F2766F"})
-  hl("@type", {fg = "#7CCBC0"})
-  hl("@string", {fg = "#8FCB7E"})
-  hl("@constant", {fg = "#F2766F"})
-  hl("@punctuation", {fg = "#C9A58F"})
+  hl("Constant", {fg = "#f7768e"})
+  hl("String", {fg = "#9ece6a"})
+  hl("Character", {fg = "#9ece6a"})
+  hl("Number", {fg = "#ff7eb6"})
+  hl("Boolean", {fg = "#ff7eb6"})
+  hl("Identifier", {fg = "#7aa2f7"})
+  hl("Function", {fg = "#7aa2f7"})
+  hl("Statement", {fg = "#f7768e"})
+  hl("Conditional", {fg = "#f7768e"})
+  hl("Repeat", {fg = "#f7768e"})
+  hl("Label", {fg = "#ff9e64"})
+  hl("Operator", {fg = "#a9b1d6"})
+  hl("Keyword", {fg = "#f7768e"})
+  hl("Exception", {fg = "#f7768e"})
+  hl("PreProc", {fg = "#ff7eb6"})
+  hl("Include", {fg = "#ff7eb6"})
+  hl("Define", {fg = "#ff7eb6"})
+  hl("Macro", {fg = "#ff7eb6"})
+  hl("PreCondit", {fg = "#ff7eb6"})
+  hl("Type", {fg = "#1abc9c"})
+  hl("StorageClass", {fg = "#1abc9c"})
+  hl("Structure", {fg = "#1abc9c"})
+  hl("Typedef", {fg = "#1abc9c"})
+  hl("Special", {fg = "#ff9e64"})
+  hl("SpecialChar", {fg = "#ff9e64"})
+  hl("Tag", {fg = "#ff7eb6"})
+  hl("Delimiter", {fg = "#565f89"})
+  hl("SpecialComment", {fg = "#565f89"})
+  hl("Debug", {fg = "#f7768e"})
+  hl("Underlined", {fg = "#1abc9c", underline = True})
+  hl("Ignore", {fg = "#565f89"})
+  hl("Error", {fg = "#f7768e", bg = "#ff9caf"})
+  hl("Todo", {fg = "#e0af68", bold = True})
+  hl("Title", {fg = "#7aa2f7", bold = True})
+  hl("Pmenu", {fg = "#a9b1d6", bg = "#24283b"})
+  hl("PmenuSel", {fg = "#1a1b26", bg = "#7aa2f7"})
+  hl("PmenuSbar", {bg = "#292e42"})
+  hl("PmenuThumb", {bg = "#3b4261"})
+  hl("StatusLine", {fg = "#565f89", bg = "#3b4261"})
+  hl("StatusLineNC", {fg = "#565f89", bg = "#292e42"})
+  hl("TabLine", {fg = "#565f89", bg = "#292e42"})
+  hl("TabLineSel", {fg = "#a9b1d6", bg = "#1a1b26"})
+  hl("TabLineFill", {bg = "#24283b"})
+  hl("VertSplit", {fg = "#3b4261"})
+  hl("WinSeparator", {fg = "#3b4261"})
+  hl("Folded", {fg = "#565f89", bg = "#292e42"})
+  hl("FoldColumn", {fg = "#565f89", bg = "#24283b"})
+  hl("SignColumn", {fg = "#a9b1d6", bg = "#24283b"})
+  hl("Cursor", {fg = "#1a1b26", bg = "#a9b1d6"})
+  hl("iCursor", {fg = "#a9b1d6", bg = "#1a1b26"})
+  hl("vCursor", {fg = "#a9b1d6", bg = "#1a1b26"})
+  hl("MatchParen", {fg = "#7aa2f7", bold = True})
+  hl("NonText", {fg = "#565f89"})
+  hl("SpecialKey", {fg = "#565f89"})
+  hl("Directory", {fg = "#7aa2f7"})
+  hl("ErrorMsg", {fg = "#f7768e"})
+  hl("WarningMsg", {fg = "#e0af68"})
+  hl("ModeMsg", {fg = "#a9b1d6"})
+  hl("MoreMsg", {fg = "#9ece6a"})
+  hl("DiagnosticError", {fg = "#f7768e"})
+  hl("DiagnosticWarn", {fg = "#e0af68"})
+  hl("DiagnosticInfo", {fg = "#bb9af7"})
+  hl("DiagnosticHint", {fg = "#1abc9c"})
+  hl("DiagnosticOk", {fg = "#9ece6a"})
+  hl("DiagnosticUnderlineError", {sp = "#f7768e", undercurl = True})
+  hl("DiagnosticUnderlineWarn", {sp = "#e0af68", undercurl = True})
+  hl("DiagnosticUnderlineInfo", {sp = "#bb9af7", undercurl = True})
+  hl("DiagnosticUnderlineHint", {sp = "#1abc9c", undercurl = True})
+  hl("@variable", {fg = "#a9b1d6"})
+  hl("@parameter", {fg = "#ff9e64"})
+  hl("@property", {fg = "#1abc9c"})
+  hl("@function", {fg = "#7aa2f7"})
+  hl("@keyword", {fg = "#f7768e"})
+  hl("@type", {fg = "#1abc9c"})
+  hl("@string", {fg = "#9ece6a"})
+  hl("@constant", {fg = "#f7768e"})
+  hl("@punctuation", {fg = "#565f89"})
 end
 
 return M

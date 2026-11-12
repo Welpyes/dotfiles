@@ -101,7 +101,7 @@ def gen_foot(c: dict) -> str:
     lines.append(f"regular3={c['warn']}")      # yellow
     lines.append(f"regular4={c['accent']}")    # blue
     lines.append(f"regular5={c['info']}")      # magenta/purple
-    lines.append(f"regular6={c['teal']}")      # cyan
+    lines.append(f"regular6={c['blue']}")      # cyan
     lines.append(f"regular7={c['fg']}")        # white
     lines.append(f"bright0={c['fg_dim']}")     # bright black
     lines.append(f"bright1={c['error_dark']}")

@@ -13,5 +13,5 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
-local colours = dofile("/home/welpyes/.config/colours/nvim.lua")
+local colours = dofile("/home/cryoxene/.config/colours/nvim.lua")
 colours.setup()
