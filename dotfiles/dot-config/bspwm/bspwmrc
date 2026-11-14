@@ -39,11 +39,12 @@ autostart(){
   dunst &
   xwallpaper --zoom ~/.config/bspwm/wallpapers/kazusa-aestethyeah.jpeg
   picom --config $HOME/.config/bspwm/picom.conf &
+  otd-daemon &
   # $HOME/.local/bin/wallpaper.sh &
   # pactl load-module module-null-sink sink_name=virtual_mic
   # pactl load-module module-remap-source master=virtual_mic.monitor source_name=virtual_mic_source
-  # pactl load-module module-null-sink sink_name=obs_mic
-  # pactl load-module module-remap-source master=obs_mic.monitor source_name=obs_mic_source
+  pactl load-module module-null-sink sink_name=obs_mic
+  pactl load-module module-remap-source master=obs_mic.monitor source_name=obs_mic_source
   # (sleep 2 && fastcompmgr) &
 }
 
