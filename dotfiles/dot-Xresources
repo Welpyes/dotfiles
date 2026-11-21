@@ -112,3 +112,6 @@ colors.orange:         #f6955b
 ! Purples
 colors.purple:         #a485dd
 colors.dark_purple:    #9071c9
+
+Xcursor.theme: Kyoyama-Kazusa
+Xcursor.size: 16
