@@ -5,7 +5,10 @@ local term = vars.term
 hl.bind("ALT + Return",         hl.dsp.exec_cmd(term))
 hl.bind("ALT + Shift + Return", hl.dsp.exec_cmd(term))
 
-hl.bind("ALT + space", hl.dsp.exec_cmd(vars.menuDrun))
+hl.bind("ALT + space", hl.dsp.exec_cmd(
+  "footclient --app-id=launcher luajit " .. os.getenv("HOME") .. "/.config/hypr/fl.lua"
+))
+
 hl.bind("ALT + Tab",   hl.dsp.exec_cmd(vars.menuWindow))
 hl.bind("ALT + r",     hl.dsp.exec_cmd(vars.menuRun))
 
