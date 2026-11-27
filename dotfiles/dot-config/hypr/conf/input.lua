@@ -5,7 +5,7 @@
 hl.config({
     input = {
         accel_profile = "flat",
-        sensitivity   = -0.10,
+        sensitivity   = 0.5,
         touchpad = {
             tap_to_click   = true,  -- sway: tap enabled
             natural_scroll = true,

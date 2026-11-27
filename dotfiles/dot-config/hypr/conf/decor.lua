@@ -16,7 +16,7 @@ hl.config({
         rounding_power = 2,
         -- sway: default_dim_inactive 0.1
         dim_inactive = true,
-        dim_strength = 0.1,
+        dim_strength = 0.2,
         blur = {
             enabled = true,
             size    = 5,     -- blur_radius
