@@ -9,8 +9,8 @@ hl.bind("ALT + space", hl.dsp.exec_cmd(
   "footclient --app-id=launcher luajit " .. os.getenv("HOME") .. "/.config/hypr/fl.lua"
 ))
 
-hl.bind("ALT + Tab",   hl.dsp.exec_cmd(vars.menuWindow))
-hl.bind("ALT + r",     hl.dsp.exec_cmd(vars.menuRun))
+-- hl.bind("ALT + Tab",   hl.dsp.exec_cmd(vars.menuWindow))
+-- hl.bind("ALT + r",     hl.dsp.exec_cmd(vars.menuRun))
 
 hl.bind("ALT + e", hl.dsp.exec_cmd(vars.fileManager))
 
@@ -20,8 +20,26 @@ hl.bind("ALT + Shift + r", hl.dsp.reload_config())
 hl.bind("ALT + Shift + q", hl.dsp.exit())
 
 hl.bind("ALT + f",         hl.dsp.window.fullscreen({ action = "toggle" }))
-hl.bind("ALT + s",         hl.dsp.window.float({ action = "toggle" }))
+hl.bind("ALT + s", function()
+    local window = hl.get_active_window()
+    local monitor = hl.get_active_monitor()
+    if window == nil or monitor == nil then return end
+
+    if window.floating then
+        hl.dispatch(hl.dsp.window.float({ action = "disable" }))
+    else
+        local w = math.floor(monitor.width / monitor.scale * 0.7)
+        local h = math.floor(monitor.height / monitor.scale * 0.7)
+        hl.dispatch(hl.dsp.window.float({ action = "enable" }))
+        hl.dispatch(hl.dsp.window.resize({ x = w, y = h, relative = false }))
+        hl.dispatch(hl.dsp.window.center())
+    end
+end)
 hl.bind("ALT + Shift + m", hl.dsp.layout("togglesplit"))
+
+-- Hold ALT and drag: LMB moves active window, RMB resizes it.
+hl.bind("ALT + mouse:272", hl.dsp.window.drag(),    { mouse = true })
+hl.bind("ALT + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 -- sway: bindsym Print exec grim ~/Pictures/Screenshots/<date>.png
 hl.bind("Print", hl.dsp.exec_cmd("grim ~/Pictures/Screenshots/$(date '+%d%m%y-%H%M%s').png"))
