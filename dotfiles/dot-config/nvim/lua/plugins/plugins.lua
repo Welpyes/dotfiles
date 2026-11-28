@@ -1,5 +1,11 @@
 return {
   {
+    "elkowar/yuck.vim",
+  },
+  {
+    "NBCL-Lang/vim-nbcl",
+  },
+  {
     'stevearc/conform.nvim',
     opts = {},
   },
